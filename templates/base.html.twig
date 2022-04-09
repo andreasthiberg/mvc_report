@@ -3,10 +3,10 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="icon" href="/icon/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="{{ asset("icon/favicon.ico") }}" type="image/x-icon">
         <title>{% block title %}My Application{% endblock %}</title>
         {% block stylesheets %}
-            <link rel="stylesheet" type="text/css" href="/css/base.css"/>
+            <link rel="stylesheet" type="text/css" href="{{ asset("css/base.css") }}">
         {% endblock %}
     </head>
     <body>
@@ -15,9 +15,9 @@
             </div>
             <div id="navbar">
                     <ul>
-                        <li><a href="/">Hem</a></li>
-                        <li><a href="/about">Om</a></li>
-                        <li><a href="/report">Redovisning</a></li>
+                        <li><a href="{{ asset("") }}">Hem</a></li>
+                        <li><a href="{{ asset("about") }}">Om</a></li>
+                        <li><a href="{{ asset("report") }}">Redovisning</a></li>
                     </ul>
             </div>
 
