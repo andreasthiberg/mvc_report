@@ -1,0 +1,33 @@
+{# templates/base.html.twig #}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" href="/icon/favicon.ico" type="image/x-icon">
+        <title>{% block title %}My Application{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" type="text/css" href="/css/base.css"/>
+        {% endblock %}
+    </head>
+    <body>
+            <div id="header">
+            <a id="header-title">Kursen MVC - Andreas Thiberg</a>
+            </div>
+            <div id="navbar">
+                    <ul>
+                        <li><a href="/">Hem</a></li>
+                        <li><a href="/about">Om</a></li>
+                        <li><a href="/report">Redovisning</a></li>
+                    </ul>
+            </div>
+
+            <div id="content">
+                {% block content %}{% endblock %}
+            </div>
+
+            <div id="footer">
+                Copyright Andreas Thiberg 2022.
+            </div>
+
+    </body>
+</html>
