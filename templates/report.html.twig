@@ -5,4 +5,21 @@
 {% block content %}
     <h1>Redovisningssida</h1>
     <h2>Kmom01</h2>
+    <h3>Berätta kort om dina förkunskaper och tidigare erfarenheter kring objektorientering.</h3>
+    Jag har erfarenhet av objektorienterad programmering från tidigare kurser, då med Javascript och Python. Jag har alltså en ganska bra känsla för grunderna i hur klasser och objekt skrivs och används. De skillnader som jag har märkt hittills i PHP verkar mest handla om syntax.
+
+    <h3>Berätta kort om PHPs modell för klasser och objekt. Vilka är de grunder man behöver veta/förstå för att kunna komma igång och skapa sina första klasser?</h3>
+    En klass skapas och ges i namn. I klassen definierar man sedan ett antal medlemsvariabler (oftast som privata, så att de bara kan användas direkt inom klassen), och metoder. Valfritt är att definiera en konstruktor som tar emot argument och direkt sätter medlemsvariablers värden. Även en destruktor är valfri, men behövs sällan.
+    Man skapar sedan nya instanser (objekt) av klassen genom syntaxet syntaxet new (klassnamn). Man kan komma åt metoder och publika variabler i ett objekt genom pilnotation. 
+
+    <h3>Reflektera kort över den kodbas, koden, strukturen som användes till uppgiften me/report, hur uppfattar du den?</h3>
+    Just nu är det lite många delar i Symfony för att ha riktig koll på allt, men vi har ju använt MVC-strukturen tidigare, så den gick ganska lätt att komma igång med den och att lägga till sin egen controller och sina egna templates. Det tog ett tag att förstå hur man skulle skapa separata templates för headers och footers, men sen gick det bra.
+    Just nu har jag bara lagt till grundläggande CSS, men tanken är att repetera lite SASS framöver.
+    
+    <h3>Med tanke på artikeln “PHP The Right Way”, vilka delar in den finner du extra intressanta och värdefulla?</h3>
+    Ett område som vi inte har gått igenom mycket särskilt mycket tidigare är säkerhet, hashing, osv. Så det ska bli kul att lära sig mer om. Namespaces verkar vara ett användbart koncept som jag ser fram emot att lära mig att använda. Avslutningsvis så ska det bli kul att titta närmare på hur php används med databaser, efter den senaste databas-kursen.
+
+    <h3>Vilken är din TIL för detta kmom?</h3>
+    Autoloading är ett nytt koncept för mig! Att importera klasser till höger och vänster är ju alltid lite struligt, så det verkar smidigt.
+
 {% endblock %}
