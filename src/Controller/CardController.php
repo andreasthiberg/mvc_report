@@ -38,19 +38,14 @@ class CardController extends AbstractController
         return $this->render('card/deck.html.twig', $data);
     }
 
-        /**
-     * @Route("/card/deck2/")
-     * name="card-deck"
+    /**
+     * @Route("/card/deck2/",name="card-deck")
      */
     public function deck2(SessionInterface $session): Response
     {
         /* Get deck from session or create one*/
-        $deck = $session->get("deck") ?? null;
-        if ($deck == null){
-            $deck = new \App\Card\Deck(); 
-            $session->set("deck",$deck);
-        }
-
+        $deck = new \App\Card\DeckWith2Jokers(); 
+        $session->set("deck",$deck);
         $data = [
             'cards_as_strings' => $deck->cardsAsStrings()
         ];
@@ -58,8 +53,7 @@ class CardController extends AbstractController
     }
 
     /**
-     * @Route("/card/deck/shuffle")
-     * name="card-shuffle"
+     * @Route("/card/deck/shuffle",name="card-shuffle")
      */
     public function shuffle(SessionInterface $session): Response
     {
@@ -74,8 +68,7 @@ class CardController extends AbstractController
     }
 
     /**
-     * @Route("/card/deck/draw")
-     * name="card-draw"
+     * @Route("/card/deck/draw",name="card-draw")
      */
     public function draw(SessionInterface $session): Response
     {
@@ -87,8 +80,7 @@ class CardController extends AbstractController
         }
         
         /*Create string representing drawn card */
-        $cardsRemaining = $deck->getNumberOfCards();
-        if($cardsRemaining == 0){
+        if($deck->getNumberOfCards() == 0 ){
             $drawnCardString = "The deck is empty.";
         } else {
             $drawnCard = $deck->drawCards(1);
@@ -97,15 +89,14 @@ class CardController extends AbstractController
 
         $data = [
             'drawn_cards_strings' => $drawnCardString,
-            'cards_left' => $cardsRemaining
+            'cards_left' => $deck->getNumberOfCards()
         ];
 
         return $this->render('card/draw.html.twig', $data);
     }
 
     /**
-     * @Route("/card/deck/draw/{amount}")
-     * name="card-draw-amount"
+     * @Route("/card/deck/draw/{amount}",name="card-draw-amount")
      */
     public function draw_number(SessionInterface $session, int $amount): Response
     {   
@@ -119,7 +110,6 @@ class CardController extends AbstractController
         /* Create string array representing drawn cards */
         $drawnCards = $deck->drawCards($amount);
         $drawnCardsAsStrings = [];
-        $cardsRemaining = $deck->getNumberOfCards();
 
         if(empty($drawnCards)){
             $drawnCardsAsStrings[] = "The deck is empty.";
@@ -131,15 +121,14 @@ class CardController extends AbstractController
 
         $data = [
             'drawn_cards_strings' => $drawnCardsAsStrings,
-            'cards_left' => $cardsRemaining
+            'cards_left' => $deck->getNumberOfCards()
         ];
 
         return $this->render('card/draw.html.twig', $data);
     }
 
     /**
-     * @Route("/card/deck/deal/{players}/{cards}")
-     * name="cards-to-players"
+     * @Route("/card/deck/deal/{players}/{cards}",name="cards-to-players")
      */
     public function cards_to_players(
         SessionInterface $session,

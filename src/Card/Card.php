@@ -14,7 +14,14 @@ class Card
     }
 
     public function getAsString(): string {
+        if($this->suit == "Joker"){
+            return "Joker";
+        }
         $cardString = $this->rank." of ".$this->suit;
         return $cardString;
+    }
+
+    public function getSuit(): string {
+        return $this->$suit;
     }
 }
