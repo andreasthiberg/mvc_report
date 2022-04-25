@@ -15,19 +15,23 @@ class Player
         $this->playerNumber = $playerNumber;
     }
 
-    public function giveCard(Card $newCard){
+    public function giveCard(Card $newCard)
+    {
         $this->playerHand->addCard($newCard);
     }
 
-    public function getHandAsStrings(): array {
+    public function getHandAsStrings(): array
+    {
         return $this->playerHand->cardsAsStrings();
     }
 
-    public function getPlayerName(): string {
-        return "Player ".$this->playerNumber;
+    public function getPlayerName(): string
+    {
+        return "Player " . $this->playerNumber;
     }
 
-    public function setNumber(int $num){
+    public function setNumber(int $num)
+    {
         $this->playerNumber = $num;
     }
 }

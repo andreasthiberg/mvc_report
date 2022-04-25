@@ -27,9 +27,9 @@ class CardController extends AbstractController
     {
         /* Get deck from session or create one*/
         $deck = $session->get("deck") ?? null;
-        if ($deck == null){
-            $deck = new \App\Card\Deck(); 
-            $session->set("deck",$deck);
+        if ($deck == null) {
+            $deck = new \App\Card\Deck();
+            $session->set("deck", $deck);
         }
 
         $data = [
@@ -44,8 +44,8 @@ class CardController extends AbstractController
     public function deck2(SessionInterface $session): Response
     {
         /* Get deck from session or create one*/
-        $deck = new \App\Card\DeckWith2Jokers(); 
-        $session->set("deck",$deck);
+        $deck = new \App\Card\DeckWith2Jokers();
+        $session->set("deck", $deck);
         $data = [
             'cards_as_strings' => $deck->cardsAsStrings()
         ];
@@ -58,8 +58,8 @@ class CardController extends AbstractController
     public function shuffle(SessionInterface $session): Response
     {
         /* Create new deck and shuffle it */
-        $deck = new \App\Card\Deck(); 
-        $session->set("deck",$deck);
+        $deck = new \App\Card\Deck();
+        $session->set("deck", $deck);
         $deck->shuffleDeck();
         $data = [
             'cards_as_strings' => $deck->cardsAsStrings()
@@ -74,13 +74,13 @@ class CardController extends AbstractController
     {
         /* Get deck from session or create one*/
         $deck = $session->get("deck") ?? null;
-        if ($deck == null){
-            $deck = new \App\Card\Deck(); 
-            $session->set("deck",$deck);
+        if ($deck == null) {
+            $deck = new \App\Card\Deck();
+            $session->set("deck", $deck);
         }
-        
+
         /*Create string representing drawn card */
-        if($deck->getNumberOfCards() == 0 ){
+        if ($deck->getNumberOfCards() == 0) {
             $drawnCardString = "The deck is empty.";
         } else {
             $drawnCard = $deck->drawCards(1);
@@ -99,22 +99,22 @@ class CardController extends AbstractController
      * @Route("/card/deck/draw/{amount}",name="card-draw-amount")
      */
     public function draw_number(SessionInterface $session, int $amount): Response
-    {   
+    {
         /* Get deck from session or create one*/
         $deck = $session->get("deck") ?? null;
-        if ($deck == null){
-            $deck = new \App\Card\Deck(); 
-            $session->set("deck",$deck);
+        if ($deck == null) {
+            $deck = new \App\Card\Deck();
+            $session->set("deck", $deck);
         }
 
         /* Create string array representing drawn cards */
         $drawnCards = $deck->drawCards($amount);
         $drawnCardsAsStrings = [];
 
-        if(empty($drawnCards)){
+        if (empty($drawnCards)) {
             $drawnCardsAsStrings[] = "The deck is empty.";
         } else {
-            foreach($drawnCards as $card){
+            foreach ($drawnCards as $card) {
                 $drawnCardsAsStrings[] = $card->getAsString();
             }
         }
@@ -132,30 +132,31 @@ class CardController extends AbstractController
      */
     public function cards_to_players(
         SessionInterface $session,
-        int $players, int $cards): Response
-    {   
+        int $players,
+        int $cards
+    ): Response {
         /* Get deck from session or create one*/
         $deck = $session->get("deck") ?? null;
-        if ($deck == null){
-            $deck = new \App\Card\Deck(); 
-            $session->set("deck",$deck);
+        if ($deck == null) {
+            $deck = new \App\Card\Deck();
+            $session->set("deck", $deck);
         }
 
         /* Add players and give them cards from the deck */
         $playerArray = [];
-        for($i = 1; $i<($players+1); $i++){
+        for ($i = 1; $i < ($players + 1); $i++) {
             $newPlayer = new \App\Card\Player();
             $newPlayer->setNumber($i);
             $drawnCards = $deck->drawCards($cards);
-            foreach ($drawnCards as $card){
+            foreach ($drawnCards as $card) {
                 $newPlayer->giveCard($card);
             }
             $playerArray[] = $newPlayer;
         }
-        
+
         /*Create string representations of players and their cards, stored in Array */
         $playersRepresentation = [];
-        foreach($playerArray as $player){
+        foreach ($playerArray as $player) {
             $playerStringArray = [];
             $playerStringArray[] = $player->getPlayerName();
             $playerStringArray[] = $player->getHandAsStrings();
@@ -163,7 +164,7 @@ class CardController extends AbstractController
         }
 
         $cardsRemaining = $deck->getNumberOfCards();
-        
+
         $data = [
             'players' => $playersRepresentation,
             'cards_left' => $cardsRemaining

@@ -6,45 +6,55 @@ use App\Card\Card;
 
 class Deck
 {
-    protected $deck = [];
+    protected $cards = [];
 
     public function __construct()
     {
         $suits = ["Clubs", "Diamonds","Hearts","Spades"];
         for ($i = 0; $i < 4; $i++) {
             for ($j = 1; $j < 14; $j++) {
-                $this->addCard($suits[$i],$j);
+                $this->addCard($suits[$i], $j);
             }
         }
     }
 
-    public function addCard($suit,$rank){
-        $this->deck[] = new Card($suit,$rank);
+    public function getCards()
+    {
+        return $this->cards;
     }
 
-    public function cardsAsStrings(): array {
+    public function addCard($suit, $rank)
+    {
+        $this->cards[] = new Card($suit, $rank);
+    }
+
+    public function cardsAsStrings(): array
+    {
         $stringArray = [];
-        foreach ($this->deck as $card){
+        foreach ($this->cards as $card) {
             $stringArray[] = $card->getAsString();
         }
         return $stringArray;
     }
 
-    public function shuffleDeck(){
-        shuffle($this->deck);
+    public function shuffleDeck()
+    {
+        shuffle($this->cards);
     }
-    
-    public function drawCards($amount = 1): Array {
+
+    public function drawCards($amount = 1): array
+    {
         $drawnCards = [];
-        for($i = 0; $i < $amount; $i++) {
-            if ($this->getNumberOfCards() != 0){
-                $drawnCards[] = array_pop($this->deck);
+        for ($i = 0; $i < $amount; $i++) {
+            if ($this->getNumberOfCards() != 0) {
+                $drawnCards[] = array_pop($this->cards);
             }
         }
         return $drawnCards;
     }
 
-    public function getNumberOfCards(): int {
-        return count($this->deck);
+    public function getNumberOfCards(): int
+    {
+        return count($this->cards);
     }
 }
