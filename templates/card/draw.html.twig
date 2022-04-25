@@ -1,0 +1,13 @@
+{# templates/blog/layout.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Me-sida{% endblock %}
+{% block content %}
+    <h1>You drew this/these cards:</h1>
+    <ul>
+    {% for card in drawn_cards_strings %}
+        <li>{{card}}</li>
+    {% endfor %}
+    </ul>
+    <p>There are {{cards_left}} cards left in the deck.</p>
+{% endblock %}

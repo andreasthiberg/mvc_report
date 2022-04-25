@@ -3,10 +3,7 @@
 
 {% block title %}Me-sida{% endblock %}
 {% block content %}
-    <h1>Cards in deck</h1>
-    {% if cards_as_strings is empty%}
-        The deck is empty!
-    {% endif %}
+    <h1>Cards in deck (shuffled)</h1>
     {% for card in cards_as_strings %}
         <li>{{ card }}</li>
     {% endfor %}

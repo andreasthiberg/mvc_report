@@ -3,8 +3,10 @@
 
 {% block title %}Me-sida{% endblock %}
 {% block content %}
-    <h1>Kortspel startsida</h1>
+    <h1>Card game landing page</h1>
     <ul>
-        <li><a href="{{ asset("card/deck") }}">Kortleken</a></li>
+        <li><a href="{{ asset("card/deck") }}">See deck</a></li>
+        <li><a href="{{ asset("card/deck/shuffle") }}">Reset and shuffle deck</a></li>
+        <li><a href="{{ asset("card/deck/draw") }}">Draw a card</a></li>
     </ul>
 {% endblock %}

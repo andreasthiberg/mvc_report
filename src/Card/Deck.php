@@ -29,4 +29,22 @@ class Deck
         }
         return $stringArray;
     }
+
+    public function shuffleDeck(){
+        shuffle($this->deck);
+    }
+    
+    public function drawCards($amount): Array {
+        $drawnCards = [];
+        for($i = 0; $i < $amount; $i++) {
+            if ($this->getNumberOfCards() != 0){
+                $drawnCards[] = array_pop($this->deck);
+            }
+        }
+        return $drawnCards;
+    }
+
+    public function getNumberOfCards(): int {
+        return count($this->deck);
+    }
 }
