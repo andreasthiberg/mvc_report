@@ -13,23 +13,29 @@ class APIController extends AbstractController
     /**
      * @Route("/card/api/deck",  name="card-api-deck")
      */
-    public function card(): Response
+    public function deck(): Response
     {
-        return $this->render('card/card.html.twig');
+        $deck = $session->get("deck") ?? [];
+        $response = new Response();
+        $response->setContent(json_encode($deck));
+        return $response;
     }
 
-    /**
-     * @Route("/dice/graphic", name="dice-graphic-home")
+        /**
+     * @Route("/api/lucky/number")
      */
-    public function home(): Response
+    public function number(): Response
     {
-        $die = new \App\Dice\DiceGraphic();
+        $this->number = random_int(0, 100);
+
         $data = [
-            'title' => 'Dice with graphic representation',
-            'die_value' => $die->roll(),
-            'die_as_string' => $die->getAsString(),
-            'link_to_roll' => $this->generateUrl('dice-graphic-roll', ['numRolls' => 5,]),
+            'lucky-number' => $this->number
         ];
-        return $this->render('dice/home.html.twig', $data);
+
+        $response = new Response();
+        $response->setContent(json_encode($data));
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
     }
 }
