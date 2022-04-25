@@ -98,7 +98,7 @@ class CardController extends AbstractController
     /**
      * @Route("/card/deck/draw/{amount}",name="card-draw-amount")
      */
-    public function draw_number(SessionInterface $session, int $amount): Response
+    public function drawNumber(SessionInterface $session, int $amount): Response
     {
         /* Get deck from session or create one*/
         $deck = $session->get("deck") ?? null;
@@ -130,7 +130,7 @@ class CardController extends AbstractController
     /**
      * @Route("/card/deck/deal/{players}/{cards}",name="cards-to-players")
      */
-    public function cards_to_players(
+    public function dealCards(
         SessionInterface $session,
         int $players,
         int $cards
