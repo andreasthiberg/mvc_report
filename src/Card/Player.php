@@ -7,10 +7,12 @@ use App\Card\CardHand;
 class Player
 {
     private $playerHand;
+    private $playerNumber;
 
-    public function __construct()
+    public function __construct($playerNumber = null)
     {
         $this->playerHand = new CardHand();
+        $this->playerNumber = $playerNumber;
     }
 
     public function giveCard(Card $newCard){
@@ -18,6 +20,14 @@ class Player
     }
 
     public function getHandAsStrings(): array {
-        return $this->playerHand->cardsAsString();
+        return $this->playerHand->cardsAsStrings();
+    }
+
+    public function getPlayerName(): string {
+        return "Player ".$this->playerNumber;
+    }
+
+    public function setNumber(int $num){
+        $this->playerNumber = $num;
     }
 }

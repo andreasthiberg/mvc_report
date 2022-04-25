@@ -38,6 +38,25 @@ class CardController extends AbstractController
         return $this->render('card/deck.html.twig', $data);
     }
 
+        /**
+     * @Route("/card/deck2/")
+     * name="card-deck"
+     */
+    public function deck2(SessionInterface $session): Response
+    {
+        /* Get deck from session or create one*/
+        $deck = $session->get("deck") ?? null;
+        if ($deck == null){
+            $deck = new \App\Card\Deck(); 
+            $session->set("deck",$deck);
+        }
+
+        $data = [
+            'cards_as_strings' => $deck->cardsAsStrings()
+        ];
+        return $this->render('card/deck.html.twig', $data);
+    }
+
     /**
      * @Route("/card/deck/shuffle")
      * name="card-shuffle"
@@ -73,11 +92,11 @@ class CardController extends AbstractController
             $drawnCardString = "The deck is empty.";
         } else {
             $drawnCard = $deck->drawCards(1);
-            $drawnCardString = $drawnCard->getAsString();
+            $drawnCardString[] = $drawnCard[0]->getAsString();
         }
 
         $data = [
-            'drawn_card_string' => $drawnCardString,
+            'drawn_cards_strings' => $drawnCardString,
             'cards_left' => $cardsRemaining
         ];
 
@@ -117,6 +136,7 @@ class CardController extends AbstractController
 
         return $this->render('card/draw.html.twig', $data);
     }
+
     /**
      * @Route("/card/deck/deal/{players}/{cards}")
      * name="cards-to-players"
@@ -132,19 +152,34 @@ class CardController extends AbstractController
             $session->set("deck",$deck);
         }
 
+        /* Add players and give them cards from the deck */
         $playerArray = [];
-
-        for($i = 0; $i<$players,$i++){
-            $newPlayer = new Player();
-            $drawnCards = $this->deck->drawCards()
-            $playerArray[] = 
+        for($i = 1; $i<($players+1); $i++){
+            $newPlayer = new \App\Card\Player();
+            $newPlayer->setNumber($i);
+            $drawnCards = $deck->drawCards($cards);
+            foreach ($drawnCards as $card){
+                $newPlayer->giveCard($card);
+            }
+            $playerArray[] = $newPlayer;
         }
         
+        /*Create string representations of players and their cards, stored in Array */
+        $playersRepresentation = [];
+        foreach($playerArray as $player){
+            $playerStringArray = [];
+            $playerStringArray[] = $player->getPlayerName();
+            $playerStringArray[] = $player->getHandAsStrings();
+            $playersRepresentation[] = $playerStringArray;
+        }
+
+        $cardsRemaining = $deck->getNumberOfCards();
+        
         $data = [
-            'drawn_cards_strings' => $drawnCardsAsStrings,
+            'players' => $playersRepresentation,
             'cards_left' => $cardsRemaining
         ];
 
-        return $this->render('card/draw.html.twig', $data);
+        return $this->render('card/players.html.twig', $data);
     }
 }

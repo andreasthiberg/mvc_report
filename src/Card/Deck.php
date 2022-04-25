@@ -34,7 +34,7 @@ class Deck
         shuffle($this->deck);
     }
     
-    public function drawCards($amount): Array {
+    public function drawCards($amount = 1): Array {
         $drawnCards = [];
         for($i = 0; $i < $amount; $i++) {
             if ($this->getNumberOfCards() != 0){
