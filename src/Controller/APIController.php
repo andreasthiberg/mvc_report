@@ -29,7 +29,7 @@ class APIController extends AbstractController
         $data = [
             'deck' => $jsonDeck,
         ];
-    
+
         return new JsonResponse($data);
     }
 
@@ -49,7 +49,7 @@ class APIController extends AbstractController
         $data = [
             'deck' => $jsonDeck,
         ];
-    
+
         return new JsonResponse($data);
     }
 }

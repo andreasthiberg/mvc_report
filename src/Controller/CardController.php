@@ -132,8 +132,7 @@ class CardController extends AbstractController
         SessionInterface $session,
         int $players,
         int $cards
-    ): Response 
-        {
+    ): Response {
         /* Get deck from session or create one */
         $deck = $session->get("deck") ?? null;
         if ($deck == null) {
@@ -162,7 +161,7 @@ class CardController extends AbstractController
 
         return $this->render('card/players.html.twig', $data);
     }
-    
+
     /**
      * @Route("/card/deck/deal/{players}/{cards}",name="deal-handler", methods={"POST"})
      */
@@ -174,5 +173,4 @@ class CardController extends AbstractController
 
         return $this->redirectToRoute("deal", ['cards' => $cards, 'players' => $players]);
     }
-
 }

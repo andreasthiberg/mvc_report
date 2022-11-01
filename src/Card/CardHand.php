@@ -18,5 +18,4 @@ class CardHand
     {
         return $this->hand;
     }
-
 }

@@ -13,9 +13,9 @@ class Card
         $this->suit = $suit;
         $this->rank = $rank;
         $this->color = "black";
-        if($suit == "Hearts" || $suit == "Diamonds"){
+        if ($suit == "Hearts" || $suit == "Diamonds") {
             $this->color = "red";
-        } else if ($suit == "Joker") {
+        } elseif ($suit == "Joker") {
             $this->color = "blue";
         }
     }

@@ -26,12 +26,12 @@ class Deck
     public function getSortedCards()
     {
         $sortedCardArray = array_merge(array(), $this->cards);
-        usort($sortedCardArray, function($cardA, $cardB) {
-            if($cardA->getSuit() == $cardB->getSuit()){
+        usort($sortedCardArray, function ($cardA, $cardB) {
+            if ($cardA->getSuit() == $cardB->getSuit()) {
                 return($cardA->getRank() - $cardB->getRank());
             }
-            return(strcmp($cardA->getSuit(),$cardB->getSuit()));
-        });    
+            return(strcmp($cardA->getSuit(), $cardB->getSuit()));
+        });
         return $sortedCardArray;
     }
 
