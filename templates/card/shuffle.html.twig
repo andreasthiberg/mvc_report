@@ -6,7 +6,7 @@
     <h1>Cards in deck (shuffled)</h1>
     <div class="card-container">
     {% for card in cards %}
-        <div class="card" ><span style="color:{{card.getColor()}}">{{card.getSymbol() }}</span><br>{{ card.getRank()}} </div>
+        <div class="card" ><span style="color:{{card.getColor()}}">{{card.getSymbol() }}</span><br>{{ card.getRankStringIncludingJoker()}} </div>
     {% endfor %}
     </div>
 {% endblock %}

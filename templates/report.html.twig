@@ -22,4 +22,23 @@
     <h3>Vilken är din TIL för detta kmom?</h3>
     Autoloading är ett nytt koncept för mig! Att importera klasser till höger och vänster är ju alltid lite struligt, så det verkar smidigt.
 
+    <h2>Kmom02</h2>
+<h3>Förklara kort de objektorienterade konstruktionerna arv, komposition, interface och trait och hur de används i PHP.</h3>
+Komposition innebär att en klass innehåller en eller flera andra klasser. I den här uppgiften gäller det exempelvis klassen CardHand, som kan innehålla ett antal object av klassen Card. Ett antal Card-objekt är i det här fallet alltså knutna till ett specifikt CardHand-objekt. Komposition är användbart för att på det här sättet knyta samman olika objekt som representerar olika "enheter" i ett program.
+<br><br>
+Arv används för att konstruera en ny klass med utgångspunkt i en existerande klass. Den nya klassen tar beståndsdelarna i den gamla klassen och lägger sedan till nya, alternativt justerar några av de gamla. Det är användbart för att skapa en "special-variant" av en mer allmän klass. I PHP görs detta genom att klassen definieras med ett "extends"-kommando. Man kan komma åt metoder från basklassen med prefixet "parent::".
+<br><br>
+Interface är en slags "ritning" för en klass, det vill säga en förteckning över vilka metoder klassen ska innehålla. För att se till att en klass följer ett interface används konstruktionen "implements <interface>" när klassen definieras. Ett interface blir en garanti för att en klass går att använda på särskilda sätt, även om man gör ändringar i klassen (som måste hålla sig inom ramarna för ett interface).
+<br><br>
+Ett trait är som ett stycke kod som stoppas in i en ny klass. Genom att stoppa sin kod i en trait - snarare än direkt i en klass - så kan samma trait återanvändas av flera olika klasser. Dessutom kan en enskild klass använda sig av många olika traits - i php går det nämligen inte att ärva från flera klasser, så man använder traits istället. Här användes konstruktionen "use" för att importera ett trait till en klass.
+
+
+<h3>Berätta om din implementation från uppgiften. Hur löste du uppgiften, är du nöjd/missnöjd, vilken förbättringspotential ser du i din koden och dina klasser?</h3>
+Jag är ganska nöjd med min implementation, även om det tog ett tag att få allt på plats. Det känns som att klasserna är lagom komplicerade och som att det finns ett bra samband emellan dem. En funderingen är att CardHand-klassen kanske inte behövs, i och med att varje spelare bara kan ha en "Hand" - men uppdelningen som jag har nu kan ju eventuellt bli användbar framöver om kortspel ska implementeras.
+
+Jag är lite osäker på om jag har löst hanteringen av POST/GET-routes på bästa sätt: Som det ser ut nu så används speciella handler-routes för att ta emot POST-requests från formulär, för att dra ett antal kort osv. Men det fungerar i alla fall.
+
+<h3>Vilken är din TIL för detta kmom?</h3>
+Hur man jobbar med relativa länkar till specifika route-namn i twig-filer. Och hur man arbetar med POST/GET i en PHP-miljö som symfony!
+
 {% endblock %}

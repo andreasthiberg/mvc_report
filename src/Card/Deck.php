@@ -6,7 +6,10 @@ use App\Card\Card;
 
 class Deck
 {
-    protected $cards = [];
+    /**
+     * @var array<Card> collection of cards in deck
+    */
+    protected array $cards = [];
 
     public function __construct()
     {
@@ -18,11 +21,23 @@ class Deck
         }
     }
 
+    /**
+     *
+     * Gets all cards
+     *
+     * @return array<Card>
+    */
     public function getCards()
     {
         return $this->cards;
     }
 
+    /**
+     *
+     * Gets all cards sorted by suit and rank
+     *
+     * @return array<Card>
+    */
     public function getSortedCards()
     {
         $sortedCardArray = array_merge(array(), $this->cards);
@@ -35,17 +50,23 @@ class Deck
         return $sortedCardArray;
     }
 
-    public function addCard($suit, $rank)
+    public function addCard(string $suit, int $rank): void
     {
         $this->cards[] = new Card($suit, $rank);
     }
 
-    public function shuffleDeck()
+    public function shuffleDeck(): void
     {
         shuffle($this->cards);
     }
 
-    public function drawCards($amount = 1): array
+    /**
+     *
+     * Draws a number of cards and returns them
+     *
+     * @return array<Mixed>
+    */
+    public function drawCards(int $amount = 1)
     {
         $drawnCards = [];
         for ($i = 0; $i < $amount; $i++) {

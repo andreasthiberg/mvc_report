@@ -4,11 +4,11 @@ namespace App\Card;
 
 class Card
 {
-    private $suit;
-    private $rank;
-    private $color;
+    private string $suit ;
+    private int $rank;
+    private string $color;
 
-    public function __construct($suit, $rank)
+    public function __construct(string $suit, int $rank)
     {
         $this->suit = $suit;
         $this->rank = $rank;
@@ -38,13 +38,12 @@ class Card
         return $suitSymbol;
     }
 
-    public function getRankIncludingJoker(): string
+    public function getRankStringIncludingJoker(): string
     {
         if ($this->rank == "0") {
             return "J";
-        } else {
-            return $this->rank;
         }
+        return strval($this->rank);
     }
 
     public function getSuit(): string
@@ -57,7 +56,7 @@ class Card
         return $this->rank;
     }
 
-    public function getColor()
+    public function getColor(): string
     {
         return $this->color;
     }

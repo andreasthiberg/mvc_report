@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Card\Deck;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,12 +16,17 @@ class APIController extends AbstractController
      */
     public function deck(SessionInterface $session): Response
     {
-        $deck = $session->get("deck") ?? null;
-        if ($deck == null) {
-            $deck = new \App\Card\Deck();
+
+        /**
+        * @var Deck current card deck
+        */
+        $deck = $session->get("deck") ?? [];
+
+        if ($deck == []) {
+            $deck = new Deck();
             $session->set("deck", $deck);
         }
-        $cards =  $deck->getCards();
+        $cards = $deck->getCards();
         $jsonDeck = [];
         foreach ($cards as $card) {
             $cardArray = ["suit" => "{$card->getSuit()}", "rank" => "{$card->getRank()}"];
@@ -38,7 +44,11 @@ class APIController extends AbstractController
      */
     public function shuffle(SessionInterface $session): Response
     {
-        $deck = $session->get("deck") ?? null;
+        /**
+        * @var Deck current card deck
+        */
+        $deck = $session->get("deck") ?? [];
+
         $deck->shuffleDeck();
         $cards =  $deck->getCards();
         $jsonDeck = [];

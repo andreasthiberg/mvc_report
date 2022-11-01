@@ -2,6 +2,10 @@
 
 namespace App\Controller;
 
+use App\Card\Card;
+use App\Card\DeckWith2Jokers;
+use App\Card\Deck;
+use App\Card\Player;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,9 +29,14 @@ class CardController extends AbstractController
     public function deck(SessionInterface $session): Response
     {
         /* Get deck from session or create one*/
-        $deck = $session->get("deck") ?? null;
-        if ($deck == null) {
-            $deck = new \App\Card\Deck();
+
+        /**
+        * @var Deck current card deck
+        */
+        $deck = $session->get("deck") ?? [];
+
+        if ($deck == []) {
+            $deck = new Deck();
             $session->set("deck", $deck);
         }
         $cards = $deck->getSortedCards();
@@ -44,7 +53,7 @@ class CardController extends AbstractController
     public function deck2(SessionInterface $session): Response
     {
         /* Get deck from session or create one*/
-        $deck = new \App\Card\DeckWith2Jokers();
+        $deck = new DeckWith2Jokers();
         $session->set("deck", $deck);
         $data = [
             'cards' => $deck->getSortedCards()
@@ -58,7 +67,7 @@ class CardController extends AbstractController
     public function shuffle(SessionInterface $session): Response
     {
         /* Create new deck and shuffle it */
-        $deck = new \App\Card\Deck();
+        $deck = new Deck();
         $session->set("deck", $deck);
         $deck->shuffleDeck();
         $data = [
@@ -73,15 +82,18 @@ class CardController extends AbstractController
     public function draw(SessionInterface $session): Response
     {
         /* Get deck from session or create one*/
+
+        /**
+        * @var Deck current card deck
+        */
         $deck = $session->get("deck") ?? null;
+
         if ($deck == null) {
-            $deck = new \App\Card\Deck();
+            $deck = new Deck();
             $session->set("deck", $deck);
         }
 
-
         $drawnCards = $deck->drawCards(1);
-
 
         $data = [
             'drawn_cards' => $drawnCards,
@@ -97,9 +109,14 @@ class CardController extends AbstractController
     public function drawAmount(SessionInterface $session, int $amount): Response
     {
         /* Get deck from session or create one*/
+
+        /**
+        * @var Deck current card deck
+        */
         $deck = $session->get("deck") ?? null;
+
         if ($deck == null) {
-            $deck = new \App\Card\Deck();
+            $deck = new Deck();
             $session->set("deck", $deck);
         }
 
@@ -133,19 +150,29 @@ class CardController extends AbstractController
         int $players,
         int $cards
     ): Response {
+
         /* Get deck from session or create one */
-        $deck = $session->get("deck") ?? null;
-        if ($deck == null) {
-            $deck = new \App\Card\Deck();
+
+        /**
+        * @var Deck current card deck
+        */
+        $deck = $session->get("deck") ?? [];
+
+        if ($deck == []) {
+            $deck = new Deck();
             $session->set("deck", $deck);
         }
 
         /* Add players and give them cards from the deck */
         $playerArray = [];
         for ($i = 1; $i < ($players + 1); $i++) {
-            $newPlayer = new \App\Card\Player();
-            $newPlayer->setNumber($i);
+            $newPlayer = new Player($i);
+
+            /**
+            * @var array<Card> current card deck
+            */
             $drawnCards = $deck->drawCards($cards);
+
             foreach ($drawnCards as $card) {
                 $newPlayer->giveCard($card);
             }
