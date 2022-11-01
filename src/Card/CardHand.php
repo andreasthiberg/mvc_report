@@ -14,13 +14,9 @@ class CardHand
         $this->hand[] = $newCard;
     }
 
-    /* Returns an array of strings representing the cards in the hand */
-    public function cardsAsStrings(): array
+    public function getCards()
     {
-        $cardStrings = [];
-        foreach ($this->hand as $card) {
-            $cardStrings[] = $card->getAsString();
-        }
-        return $cardStrings;
+        return $this->hand;
     }
+
 }

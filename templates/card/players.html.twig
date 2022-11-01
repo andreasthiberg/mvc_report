@@ -1,15 +1,34 @@
-{# templates/blog/layout.html.twig #}
+{# templates/card/players.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block title %}Me-sida{% endblock %}
 {% block content %}
-    <h1>Players were given these cards:</h1>
+    <h1>Deal to players</h1>
+    <form method="post">
+        <legend>Deal x cards to y players</legend>
+            <p>
+                <label>Players:
+                    <input type="number" name="players" value="">
+                </label>
+            </p>
+            <p>
+                <label>Cards:
+                    <input type="number" name="cards" value="">
+                </label>
+            </p>
+            <p>
+                <input type="submit" value="Deal">
+            </p>
+    </form>
+    
     <ul>
     {% for player in players %}
-        <h3>{{player[0]}}</h3>
-        {% for card in player[1] %}
-            <li>{{card}}</li>
+        <h3>{{player.getPlayerName()}}</h3>
+        <div class="card-container">
+        {% for card in player.getHand().getCards() %}
+            <div class="card" ><span style="color:{{card.getColor()}}">{{card.getSymbol() }}</span><br>{{ card.getRank()}} </div>
         {% endfor %}
+        </div>
     {% endfor %}
     </ul>
     <p>There are {{cards_left}} cards left in the deck.</p>

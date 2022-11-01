@@ -11,20 +11,45 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 class APIController extends AbstractController
 {
     /**
-     * @Route("/card/api/deck",  name="card-api-deck")
+     * @Route("/card/api/deck",  name="api-deck")
      */
     public function deck(SessionInterface $session): Response
     {
         $deck = $session->get("deck") ?? null;
-        $cards = $deck->getCards();
-        $returnArray = [];
-        foreach ($cards as $card) {
-            $cardArray = [];
-            $cardArray[] = $card->getRank();
-            $cardArray[] = $card->getSuit();
-            $returnArray[] = $cardArray;
+        if ($deck == null) {
+            $deck = new \App\Card\Deck();
+            $session->set("deck", $deck);
         }
-        $jsonDeck = json_encode($returnArray);
-        return new JsonResponse($jsonDeck);
+        $cards =  $deck->getCards();
+        $jsonDeck = [];
+        foreach ($cards as $card) {
+            $cardArray = ["suit" => "{$card->getSuit()}", "rank" => "{$card->getRank()}"];
+            $jsonDeck[] = $cardArray;
+        }
+        $data = [
+            'deck' => $jsonDeck,
+        ];
+    
+        return new JsonResponse($data);
+    }
+
+    /**
+     * @Route("/card/api/deck/shuffle",  name="api-shuffle", methods={"POST", "GET"})
+     */
+    public function shuffle(SessionInterface $session): Response
+    {
+        $deck = $session->get("deck") ?? null;
+        $deck->shuffleDeck();
+        $cards =  $deck->getCards();
+        $jsonDeck = [];
+        foreach ($cards as $card) {
+            $cardArray = ["suit" => "{$card->getSuit()}", "rank" => "{$card->getRank()}"];
+            $jsonDeck[] = $cardArray;
+        }
+        $data = [
+            'deck' => $jsonDeck,
+        ];
+    
+        return new JsonResponse($data);
     }
 }

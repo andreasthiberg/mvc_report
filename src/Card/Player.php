@@ -20,11 +20,10 @@ class Player
         $this->playerHand->addCard($newCard);
     }
 
-    public function getHandAsStrings(): array
+    public function getHand()
     {
-        return $this->playerHand->cardsAsStrings();
+        return $this->playerHand;
     }
-
     public function getPlayerName(): string
     {
         return "Player " . $this->playerNumber;

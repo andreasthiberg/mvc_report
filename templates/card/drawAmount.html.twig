@@ -4,9 +4,20 @@
 {% block title %}Me-sida{% endblock %}
 {% block content %}
     <h1>Card draw:</h1>
-    {% if drawn_cards is empty%}
-    The deck is empty!
-    {% else %}
+    <form method="post">
+            <legend>Draw x cards</legend>
+            <p>
+                <label>Amount:
+                    <input type="number" name="amount" value="">
+                </label>
+            </p>
+            <p>
+                <input type="submit" value="Draw">
+            </p>
+    </form>
+    
+    
+    {% if not drawn_cards is empty%}
         <div class="card-container">
         {% for card in drawn_cards %}
             <div class="card" ><span style="color:{{card.getColor()}}">{{card.getSymbol() }}</span><br>{{ card.getRank()}} </div>

@@ -23,18 +23,21 @@ class Deck
         return $this->cards;
     }
 
+    public function getSortedCards()
+    {
+        $sortedCardArray = array_merge(array(), $this->cards);
+        usort($sortedCardArray, function($cardA, $cardB) {
+            if($cardA->getSuit() == $cardB->getSuit()){
+                return($cardA->getRank() - $cardB->getRank());
+            }
+            return(strcmp($cardA->getSuit(),$cardB->getSuit()));
+        });    
+        return $sortedCardArray;
+    }
+
     public function addCard($suit, $rank)
     {
         $this->cards[] = new Card($suit, $rank);
-    }
-
-    public function cardsAsStrings(): array
-    {
-        $stringArray = [];
-        foreach ($this->cards as $card) {
-            $stringArray[] = $card->getAsString();
-        }
-        return $stringArray;
     }
 
     public function shuffleDeck()

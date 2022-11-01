@@ -1,10 +1,12 @@
-{# templates/blog/layout.html.twig #}
+{# templates/card/shuffle.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block title %}Me-sida{% endblock %}
 {% block content %}
     <h1>Cards in deck (shuffled)</h1>
-    {% for card in cards_as_strings %}
-        <li>{{ card }}</li>
+    <div class="card-container">
+    {% for card in cards %}
+        <div class="card" ><span style="color:{{card.getColor()}}">{{card.getSymbol() }}</span><br>{{ card.getRank()}} </div>
     {% endfor %}
+    </div>
 {% endblock %}

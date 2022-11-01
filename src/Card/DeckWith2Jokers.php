@@ -15,7 +15,7 @@ class DeckWith2Jokers extends Deck
                 $this->addCard($suits[$i], $j);
             }
         }
-        $this->addCard("Joker", 1);
-        $this->addCard("Joker", 2);
+        $this->addCard("Joker", 0);
+        $this->addCard("Joker", 0);
     }
 }
