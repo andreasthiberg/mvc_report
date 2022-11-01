@@ -41,7 +41,15 @@ class Card
     public function getRankStringIncludingJoker(): string
     {
         if ($this->rank == "0") {
+            return "Jo";
+        } else if (($this->rank == "13")){
+            return "K";
+        } else if (($this->rank == "12")){
+            return "Q";
+        } else if (($this->rank == "11")){
             return "J";
+        } else if (($this->rank == "1")){
+            return "A";
         }
         return strval($this->rank);
     }
