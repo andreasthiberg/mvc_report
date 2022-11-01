@@ -4,28 +4,35 @@
 {% block title %}Me-sida{% endblock %}
 {% block content %}
     <h1>Spela 21</h1>
-    <h2>Dina kort</h2>
+    <div class="game-container">
+    <div class="player-cards-container">
+    <h2>Spelare</h2>
+        Poäng: {{ user_points}}
         <div class="card-container">
         {% for card in user_cards %}
             <div class="card" ><span style="color:{{card.getColor()}}">{{card.getSymbol() }}</span><br>{{ card.getRankStringIncludingJoker()}} </div>
         {% endfor %}
         </div>
-        Poäng: {{ user_points}}
-    <h2>Bankens kort</h2>
+        
+    <h2>Banken</h2>
+    Poäng: {{ bank_points}}
         <div class="card-container">
         {% for card in bank_cards %}
             <div class="card" ><span style="color:{{card.getColor()}}">{{card.getSymbol() }}</span><br>{{ card.getRankStringIncludingJoker()}} </div>
         {% endfor %}
         </div>
-        Poäng: {{ bank_points}}
-    <h2>Info</h2>
+        
+
+    </div>
+    <div class="info-container">
     {% if winner == "bank"%}
     Du förlorade!
     {% elseif winner == "user" %}
     Du vann!
     {% endif %}
+    </div>
+    <div class="button-container">
     <form method="post">
-            <legend>Alternativ</legend>
                 {% if winner == ""%}
                 {% if turn == "user"%}
                 <button name="action" value="user-draw" type="submit">Dra ett kort</button>
@@ -37,4 +44,6 @@
                 <button name="action" value="restart" type="submit">Börja om</button>
 
     </form>
+    </div>
+    </div>
 {% endblock %}
