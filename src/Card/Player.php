@@ -7,8 +7,8 @@ use App\Card\CardHand;
 class Player
 {
     /**
-     * @var CardHand Player's hand 
-    */ 
+     * @var CardHand Player's hand
+    */
     private $playerHand;
     private int $playerNumber;
 

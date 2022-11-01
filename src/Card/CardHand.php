@@ -43,7 +43,7 @@ class CardHand
         // Add points from cards except aces (and count aces)
         foreach ($this->hand as $card) {
             $cardRank = $card->getRank();
-            if($cardRank == 1){
+            if ($cardRank == 1) {
                 $numberOfAces++;
             } else {
                 $newTotal = $newTotal + $card->getRank();
@@ -51,10 +51,10 @@ class CardHand
         }
 
         //Add aces value
-        if($numberOfAces > 0){
-            $maxAceValue = 14 + ($numberOfAces-1)*1;
+        if ($numberOfAces > 0) {
+            $maxAceValue = 14 + ($numberOfAces - 1) * 1;
             $minAceValue = $numberOfAces;
-            if(($maxAceValue + $newTotal) <= 21 ){
+            if (($maxAceValue + $newTotal) <= 21) {
                 $newTotal = $newTotal + $maxAceValue;
             } else {
                 $newTotal = $newTotal + $numberOfAces;

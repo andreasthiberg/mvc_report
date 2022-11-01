@@ -42,13 +42,13 @@ class Card
     {
         if ($this->rank == "0") {
             return "Jo";
-        } else if (($this->rank == "13")){
+        } elseif (($this->rank == "13")) {
             return "K";
-        } else if (($this->rank == "12")){
+        } elseif (($this->rank == "12")) {
             return "Q";
-        } else if (($this->rank == "11")){
+        } elseif (($this->rank == "11")) {
             return "J";
-        } else if (($this->rank == "1")){
+        } elseif (($this->rank == "1")) {
             return "A";
         }
         return strval($this->rank);

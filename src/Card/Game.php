@@ -30,56 +30,85 @@ class Game
         $this->winner = "";
     }
 
-    public function getUserCards(){
+    /**
+     *
+     * Gets all cards for user (human player)
+     *
+     * @return array<Card>
+    */
+    public function getUserCards()
+    {
         return $this->user->getHand()->getCards();
     }
 
-    public function getBankCards(){
+    /**
+     *
+     * Gets all cards for bank
+     *
+     * @return array<Card>
+    */
+    public function getBankCards()
+    {
         return $this->bank->getHand()->getCards();
     }
 
-    public function getUserPoints(){
+    public function getUserPoints(): int
+    {
         return $this->userPoints;
     }
 
-    public function getBankPoints(){
+    public function getBankPoints(): int
+    {
         return $this->bankPoints;
     }
 
-    public function drawUserCard(){
+    public function drawUserCard(): void
+    {
+        /**
+         * @var array<Card> drawn cards
+        */
         $drawnCards = $this->deck->drawCards(1);
+
         $this->user->giveCard($drawnCards[0]);
         $this->userPoints = $this->user->getHand()->getPoints();
-        if($this->userPoints == 21){
+        if ($this->userPoints == 21) {
             $this->turn = "bank";
         }
-        if($this->userPoints > 21){
+        if ($this->userPoints > 21) {
             $this->winner = "bank";
         }
     }
 
-    public function getWinner(){
+    public function getWinner(): string
+    {
         return $this->winner;
     }
 
-    public function getTurn(){
+    public function getTurn(): string
+    {
         return $this->turn;
     }
 
-    public function userStop(){
+    public function userStop(): void
+    {
         $this->turn = "bank";
     }
 
-    public function drawBankCard(){
+    public function drawBankCard(): void
+    {
+        /**
+         * @var array<Card> drawn cards
+        */
         $drawnCards = $this->deck->drawCards(1);
+
         $this->bank->giveCard($drawnCards[0]);
         $this->bankPoints = $this->bank->getHand()->getPoints();
-        if($this->bankPoints == 21){
+        if ($this->bankPoints == 21) {
             $this->winner = "bank";
-        } else if($this->bankPoints > 21){
+        } elseif ($this->bankPoints > 21) {
             $this->winner = "user";
-        } else if($this->bankPoints >= 17){
-            if($this->userPoints <= $this->bankPoints){
+        } elseif ($this->bankPoints >= 17) {
+            if ($this->userPoints <= $this->bankPoints) {
                 $this->winner = "bank";
             } else {
                 $this->winner = "user";
