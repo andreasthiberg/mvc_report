@@ -1,0 +1,23 @@
+{# templates/card/card.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Me-sida{% endblock %}
+{% block content %}
+    <h1>Card deck options</h1>
+    <ul>
+        <li><a href="{{ path("deck-create") }}">See (or create if missing) normal deck</a></li>
+        <li><a href="{{ path("deck-shuffle") }}">Create or reset and shuffle normal deck</a></li>
+        <br>
+        <li><a href="{{ path("deck-draw")}}">Draw a card</a></li>
+        <li><a href="{{ path("deck-draw-amount", {amount: 0}) }}">Draw x cards</a></li>
+        <br>
+        <li><a href="{{ path("deck-create-2") }}">Create deck with jokers</a></li>
+        <br>
+        <h2>Deal x cards to x players</h2>
+        <li><a href="{{ path("deck-deal", {players: 0, cards: 0}) }}">Deal to players</a></li>
+        <br>
+        <h2>JSON Routes</h2>
+        <li><a href="{{ path("api-deck-show") }}">Get deck as JSON (GET)</a></li>
+        <li><a href="{{ path("api-deck-shuffle") }}">Shuffle cards and get as JSON (GET/POST)</a></li>
+    </ul>
+{% endblock %}

@@ -12,19 +12,18 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-class CardController extends AbstractController
+class DeckController extends AbstractController
 {
     /**
-     * @Route("/card")
-     * name="card-home"
+     * @Route("/card", name="deck-home")
      */
     public function card(): Response
     {
-        return $this->render('card/card.html.twig');
+        return $this->render('deck/deck-home.html.twig');
     }
 
     /**
-     * @Route("/card/deck/", name="card-deck")
+     * @Route("/card/deck/", name="deck-create")
      */
     public function deck(SessionInterface $session): Response
     {
@@ -44,11 +43,11 @@ class CardController extends AbstractController
             'cards' => $cards
         ];
 
-        return $this->render('card/deck.html.twig', $data);
+        return $this->render('deck/deck.html.twig', $data);
     }
 
     /**
-     * @Route("/card/deck2/",name="card-deck-2")
+     * @Route("/card/deck2/",name="deck-create-2")
      */
     public function deck2(SessionInterface $session): Response
     {
@@ -58,11 +57,11 @@ class CardController extends AbstractController
         $data = [
             'cards' => $deck->getSortedCards()
         ];
-        return $this->render('card/deck.html.twig', $data);
+        return $this->render('deck/deck.html.twig', $data);
     }
 
     /**
-     * @Route("/card/deck/shuffle",name="card-shuffle")
+     * @Route("/card/deck/shuffle",name="deck-shuffle")
      */
     public function shuffle(SessionInterface $session): Response
     {
@@ -73,11 +72,11 @@ class CardController extends AbstractController
         $data = [
             'cards' => $deck->getCards()
         ];
-        return $this->render('card/shuffle.html.twig', $data);
+        return $this->render('deck/shuffle.html.twig', $data);
     }
 
     /**
-     * @Route("/card/deck/draw",name="card-draw")
+     * @Route("/card/deck/draw",name="deck-draw")
      */
     public function draw(SessionInterface $session): Response
     {
@@ -100,11 +99,11 @@ class CardController extends AbstractController
             'cards_left' => $deck->getNumberOfCards()
         ];
 
-        return $this->render('card/draw.html.twig', $data);
+        return $this->render('deck/draw.html.twig', $data);
     }
 
     /**
-     * @Route("/card/deck/draw/{amount}",name="card-draw-amount", methods={"GET"})
+     * @Route("/card/deck/draw/{amount}",name="deck-draw-amount", methods={"GET"})
      */
     public function drawAmount(SessionInterface $session, int $amount): Response
     {
@@ -128,22 +127,22 @@ class CardController extends AbstractController
             'cards_left' => $deck->getNumberOfCards()
         ];
 
-        return $this->render('card/drawAmount.html.twig', $data);
+        return $this->render('deck/drawAmount.html.twig', $data);
     }
 
     /**
-     * @Route("/card/deck/draw/{amount}",name="card-draw-amount-handler", methods={"POST"})
+     * @Route("/card/deck/draw/{amount}",name="deck-draw-amount-handler", methods={"POST"})
      */
     public function drawHandler(Request $request): Response
     {
         //Get number of cards to draw from post request
         $amount = $request->request->get('amount');
 
-        return $this->redirectToRoute("card-draw-amount", ['amount' => $amount]);
+        return $this->redirectToRoute("deck-draw-amount", ['amount' => $amount]);
     }
 
     /**
-     * @Route("/card/deck/deal/{players}/{cards}",name="deal",  methods={"GET"})
+     * @Route("/card/deck/deal/{players}/{cards}",name="deck-deal",  methods={"GET"})
      */
     public function dealCards(
         SessionInterface $session,
@@ -186,11 +185,11 @@ class CardController extends AbstractController
             'cards_left' => $cardsRemaining
         ];
 
-        return $this->render('card/players.html.twig', $data);
+        return $this->render('deck/deal.html.twig', $data);
     }
 
     /**
-     * @Route("/card/deck/deal/{players}/{cards}",name="deal-handler", methods={"POST"})
+     * @Route("/card/deck/deal/{players}/{cards}",name="deck-deal-handler", methods={"POST"})
      */
     public function dealHandler(Request $request): Response
     {
@@ -198,6 +197,6 @@ class CardController extends AbstractController
         $players = $request->request->get('players');
         $cards = $request->request->get('cards');
 
-        return $this->redirectToRoute("deal", ['cards' => $cards, 'players' => $players]);
+        return $this->redirectToRoute("deck-deal", ['cards' => $cards, 'players' => $players]);
     }
 }

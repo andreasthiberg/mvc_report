@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class MeController extends AbstractController
 {
     /**
-     * @Route("/")
+     * @Route("/", name="home")
      */
     public function start(): Response
     {
@@ -17,7 +17,7 @@ class MeController extends AbstractController
     }
 
     /**
-     * @Route("/about")
+     * @Route("/about", name="about")
      */
     public function report(): Response
     {
@@ -25,7 +25,7 @@ class MeController extends AbstractController
     }
 
     /**
-     * @Route("/report")
+     * @Route("/report", name="report")
      */
     public function about(): Response
     {

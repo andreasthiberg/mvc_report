@@ -1,0 +1,12 @@
+{# templates/card/card.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Me-sida{% endblock %}
+{% block content %}
+    <h1>Kortspel - 21</h1>
+    <p>Här kan du spela kortspelet 21. Du får ett kort i taget, och får stanna du vill. Målet är att få så nära 21 poäng som möjligt utan att gå över.
+    Ess kan räknas som 14 eller 1. När du stannar är det bankens tur, som ska göra samma sak. Om du slår banken vinner du - om ni får samma poäng vinner banken.
+    <br><br> Lycka till!
+    <ul>
+        <li><a href="{{ path("game-play") }}">Börja spelet</a></li>
+{% endblock %}

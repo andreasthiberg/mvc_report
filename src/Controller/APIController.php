@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 class APIController extends AbstractController
 {
     /**
-     * @Route("/card/api/deck",  name="api-deck")
+     * @Route("/card/api/deck",  name="api-deck-show")
      */
     public function deck(SessionInterface $session): Response
     {
@@ -40,7 +40,7 @@ class APIController extends AbstractController
     }
 
     /**
-     * @Route("/card/api/deck/shuffle",  name="api-shuffle", methods={"POST", "GET"})
+     * @Route("/card/api/deck/shuffle",  name="api-deck-shuffle", methods={"POST", "GET"})
      */
     public function shuffle(SessionInterface $session): Response
     {
@@ -51,6 +51,7 @@ class APIController extends AbstractController
 
         $deck->shuffleDeck();
         $cards =  $deck->getCards();
+
         $jsonDeck = [];
         foreach ($cards as $card) {
             $cardArray = ["suit" => "{$card->getSuit()}", "rank" => "{$card->getRank()}"];
