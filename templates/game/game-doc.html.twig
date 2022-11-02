@@ -4,5 +4,13 @@
 {% block title %}Me-sida{% endblock %}
 {% block content %}
     <h1>Dokumentation för spelet 21</h1>
-    <p>Hej</p>
+    <h2>Flowchart</h2>
+    <img style="max-width:600px" src="{{ asset("img/flowchart.png") }}">
+        <h2>Nya klasser</h2>
+    Den enda ytterligare klass jag behöver för att implementera spelet är just en "Game"-klass. Ett nytt sådant objekt kan skapas när spelet körs igång. I klassen sparar jag i sin tur två spelare - användaren och banken - och varje spelares poäng. Eventuellt så kan klassen och innehålla properties för vems tur det är, och om något har vunnit spelet.
+    <h2>Pseudokod</h2>
+    Nedan är en bid pseudo-kod för att genomföra en kortutdelning och en ihopräkning av poäng i Game-klassen:
+    <br><br>
+    <img style="max-width:600px" src="{{ asset("img/pseudocode.png") }}">
+
 {% endblock %}
