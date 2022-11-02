@@ -62,23 +62,6 @@ class Game
         return $this->bankPoints;
     }
 
-    public function drawUserCard(): void
-    {
-        /**
-         * @var array<Card> drawn cards
-        */
-        $drawnCards = $this->deck->drawCards(1);
-
-        $this->user->giveCard($drawnCards[0]);
-        $this->userPoints = $this->user->getHand()->getPoints();
-        if ($this->userPoints == 21) {
-            $this->turn = "bank";
-        }
-        if ($this->userPoints > 21) {
-            $this->winner = "bank";
-        }
-    }
-
     public function getWinner(): string
     {
         return $this->winner;
@@ -94,13 +77,17 @@ class Game
         $this->turn = "bank";
     }
 
-    public function drawBankCard(): void
+    public function drawBankCard(Card $presetCard = null): void
     {
-        /**
-         * @var array<Card> drawn cards
-        */
-        $drawnCards = $this->deck->drawCards(1);
-
+        //Optional preset card as argument - otherwise draw
+        if (is_null($presetCard)) {
+            /**
+             * @var array<Card> drawn cards
+            */
+            $drawnCards = $this->deck->drawCards(1);
+        } else {
+            $drawnCards = [$presetCard];
+        }
         $this->bank->giveCard($drawnCards[0]);
         $this->bankPoints = $this->bank->getHand()->getPoints();
         if ($this->bankPoints == 21) {
@@ -113,6 +100,27 @@ class Game
             } else {
                 $this->winner = "user";
             }
+        }
+    }
+
+    public function drawUserCard(Card $presetCard = null): void
+    {
+        if (is_null($presetCard)) {
+            /**
+             * @var array<Card> drawn cards
+            */
+            $drawnCards = $this->deck->drawCards(1);
+        } else {
+            $drawnCards = [$presetCard];
+        }
+
+        $this->user->giveCard($drawnCards[0]);
+        $this->userPoints = $this->user->getHand()->getPoints();
+        if ($this->userPoints == 21) {
+            $this->turn = "bank";
+        }
+        if ($this->userPoints > 21) {
+            $this->winner = "bank";
         }
     }
 }

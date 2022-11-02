@@ -27,6 +27,7 @@ class Player
     {
         return $this->playerHand;
     }
+
     public function getPlayerName(): string
     {
         return "Player " . $this->playerNumber;

@@ -21,7 +21,7 @@
 
     <h3>Vilken är din TIL för detta kmom?</h3>
     Autoloading är ett nytt koncept för mig! Att importera klasser till höger och vänster är ju alltid lite struligt, så det verkar smidigt.
-
+    <br>    <br>
     <h2>Kmom02</h2>
 <h3>Förklara kort de objektorienterade konstruktionerna arv, komposition, interface och trait och hur de används i PHP.</h3>
 Komposition innebär att en klass innehåller en eller flera andra klasser. I den här uppgiften gäller det exempelvis klassen CardHand, som kan innehålla ett antal object av klassen Card. Ett antal Card-objekt är i det här fallet alltså knutna till ett specifikt CardHand-objekt. Komposition är användbart för att på det här sättet knyta samman olika objekt som representerar olika "enheter" i ett program.
@@ -40,5 +40,20 @@ Jag är lite osäker på om jag har löst hanteringen av POST/GET-routes på bä
 
 <h3>Vilken är din TIL för detta kmom?</h3>
 Hur man jobbar med relativa länkar till specifika route-namn i twig-filer. Och hur man arbetar med POST/GET i en PHP-miljö som symfony!
+    <br><br>
+<h2>Kmom03</h2>
+<h3>Berätta hur det kändes att modellera ett kortspel med flödesdiagram och psuedokod. Var det något som du tror stödjer dig i din problemlösning och tankearbete för att strukturera koden kring en applikation?</h3>
+Kortspelet var ju i det här fallet ganska simpelt, så jag tror att jag hade klarat mig ganska bra utan flödesdiagram och liknande. Med det sagt så tycker jag att det har en intressant funktion att arbeta med planering innan man börjar med själva kodningen: Min vanliga process är att helt enkelt börja skriva kod och sen pröva mig fram och lägga till nya delar som behövs. Det brukar ju fungera i slutändan, men resultatet kan ofta bli lite rörligt. Jag misstänker att om man arbetar mer med planering så kan man komma över "prövo-stadiet" tidigare vilket resulterar i ett mer strukturerat slutresultat.
+
+
+<h3>Berätta om din implementation från uppgiften. Hur löste du uppgiften, är du nöjd/missnöjd, vilken förbättringspotential ser du i din koden, dina klasser och applikationen som helhet?</h3>
+Jag är nöjd! Det kändes bra att det var så enkelt att använda sig av de klasser jag skrev i förra momentet, och att spelet därför gick enkelt att implementera. Eventuellt hade man kunnat lösa själva interaktionen med användaren på ett att sätt - nu användare jag mig av formulär och POST-routes rakt av, men jag är inte säker på att det är det mest naturliga sättet - det blir ju lite märkligt med ett spel där sidan laddas om varje gång användaren gör något.
+
+<h3>Vilken är din känsla för att koda i ett ramverk som Symfony, så här långt in i kursen?</h3>
+Det känns ganska bra. Det känns lite rörigt med alla olika delar, men i stort så liknar ju Symfony andra ramverk som vi/jag har använt, så jag har en känsla för hur de olika elementen hänger ihop. MVC-systemet med templates och controllers är ju lite mer komplicerade än de SPA-sidor som vi har gjort i andra kursen, men jag gissar att det också har större potential inom olika användningsområden. Spontant så känns det svårare att jobba med interaktiva element i Symfony än i exempelvis React, men det kanske bara kräver lite mer kunskap. 
+
+<h3>Vilken är din TIL för detta kmom?</h3>
+Hur man arbetar med stark typning i PHP på olika sätt. Det krävdes en del mixtrande för att ta phpstan skulle vara nöjd.
+
 
 {% endblock %}
