@@ -39,7 +39,7 @@ class DeckTest extends TestCase
     public function testDrawCard()
     {
         $deck = new Deck();
-        $cards = $deck->drawCards(1); 
+        $cards = $deck->drawCards(1);
         $this->assertInstanceOf("\App\Card\Card", $cards[0]);
         $this->assertNotContains($cards[0], $deck->getCards());
     }
@@ -55,8 +55,5 @@ class DeckTest extends TestCase
 
         $this->assertNotEquals($notShuffledDeck, $shuffleDeck);
         $this->assertEquals($shuffleDeck->getSortedCards(), $notShuffledDeck->getCards());
-
-
-
     }
 }

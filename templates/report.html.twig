@@ -55,5 +55,27 @@ Det känns ganska bra. Det känns lite rörigt med alla olika delar, men i stort
 <h3>Vilken är din TIL för detta kmom?</h3>
 Hur man arbetar med stark typning i PHP på olika sätt. Det krävdes en del mixtrande för att ta phpstan skulle vara nöjd.
 
+    <br><br>
+<h2>Kmom04</h2>
+<h3>Berätta hur du upplevde att skriva kod som testar annan kod med PHPUnit och hur du upplever phpunit rent allmänt.</h3>
+
+Jag tyckte att det gick ganska lätt att skriva tester - jag har gjort det i andra språk vid tidigare tillfällen så jag är bekant med utformningen och processen. PHPUnit tinnebar egentligen inga särskilda utmaningar utan det gick snabbt och smidigt att skriva tester. Det var också enkelt att skriva (de visserligen enkla) mock-klasserna som jag behövde för att testa några delar av koden.
+
+<h3>Hur väl lyckades du med kodtäckningen av din kod, lyckades du nå mer än 90% kodtäckning?</h3>
+Vad jag kan se så har jag 100% på alla klasser. Jag löste det genom att helt enkelt ta itu med de rader som inte var testade en efter en. Det enda som var lite lurigt var att testa kortspelets reaktion på olika poäng - jag var tvungen att läsa mock-versioner av kort för det, och göra lite små ändringar i klassen.
+
+<h3>Upplever du din egen kod som “testbar kod” eller finns det delar i koden som är mer eller mindre testbar och finns det saker som kan göras för att förbättra kodens testbarhet?</h3>
+Jag tyckte det gick ganska lätt att testa koden i allmänheten, eftersom all funktionalitet är tydligt uppdelad i olika klasser och metoder. Det enda jag känner mig osäker på är det faktum att många av klasserna är beroende av andra klasserna - klassen Player innehåller objekt av klassen CardHand, som innehållet objekt av klassen Card, osv. Det gör att ändringar i klassen Card kan få alla tester att sluta fungera. Man kan säkert komma runt detta med mer komplicerade mocks - men jag visste inte riktigt hur jag skulle förhålla mig till det här.
+
+<h3>Valde du att skriva om delar av din kod för att förbättra den eller göra den mer testbar, om så berätta lite hur du tänkte.</h3>
+Jag gjorde bara små ändringar för att tillåta testerna att skicka in mockade spelkort i klassen Game. Det verkade nödvändigt för att kunna testa hur spelet reagerar på specifika kort - innan skedde dragningen av kort enbart automatiskt inne i klassen.
+
+<h3>Fundera över om du anser att testbar kod är något som kan identifiera “snygg och ren kod”.</h3>
+De saker som verkar göra koden testbar - modulering, att den är tydligt uppdelad i olika funktioner där varje funktion har en särskild roll - är ju saker som också kännetecknar snygg kod.  I övrigt så förenklar tydligt skriven kod (t.ex. namn på metoder) avsevärt när man ska skriva specifika tester för olika funktioner.
+
+<h3>Vilken är din TIL för detta kmom?</h3>
+Hur man skriver mocks - jag tror att detta var första gången jag prövade på det, även om jag har skrivit enhetstester i andra språk tidigare.
+
+
 
 {% endblock %}

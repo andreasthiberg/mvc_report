@@ -28,8 +28,8 @@ class CardHandTest extends TestCase
     public function testHandWithCards()
     {
         $cardHand = new CardHand();
-        $testCard1 = new Card("Hearts",2);
-        $testCard2 = new Card("Clubs",11);
+        $testCard1 = new Card("Hearts", 2);
+        $testCard2 = new Card("Clubs", 11);
         $cardHand->addCard($testCard1);
         $cardHand->addCard($testCard2);
 
@@ -42,8 +42,8 @@ class CardHandTest extends TestCase
     public function testCountingPoints()
     {
         $cardHand = new CardHand();
-        $testCard1 = new Card("Hearts",1);
-        $testCard2 = new Card("Clubs",6);
+        $testCard1 = new Card("Hearts", 1);
+        $testCard2 = new Card("Clubs", 6);
         $cardHand->addCard($testCard1);
         $cardHand->addCard($testCard2);
 
@@ -57,14 +57,13 @@ class CardHandTest extends TestCase
     public function testCountingPointsWithAces()
     {
         $cardHand = new CardHand();
-        $testCard1 = new Card("Hearts",1);
-        $testCard2 = new Card("Diamonds",1);
-        $testCard3 = new Card("Clubs",10);
+        $testCard1 = new Card("Hearts", 1);
+        $testCard2 = new Card("Diamonds", 1);
+        $testCard3 = new Card("Clubs", 10);
         $cardHand->addCard($testCard1);
         $cardHand->addCard($testCard2);
         $cardHand->addCard($testCard3);
 
         $this->assertEquals(12, $cardHand->getPoints());
     }
-
 }

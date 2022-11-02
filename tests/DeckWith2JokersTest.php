@@ -18,8 +18,7 @@ class DeckWith2JokersTest extends TestCase
         $deck = new DeckWith2Jokers();
         $this->assertInstanceOf("\App\Card\DeckWith2Jokers", $deck);
 
-        $cards = $deck->getCards();    
-        $this->assertEquals("Joker",$cards[53]->getSuit());
+        $cards = $deck->getCards();
+        $this->assertEquals("Joker", $cards[53]->getSuit());
     }
-
 }

@@ -27,16 +27,16 @@ class GameTest extends TestCase
         $game = new Game();
         $userCards = $game->getUserCards();
         $bankCards = $game->getBankCards();
-        $this->assertEquals([],$bankCards);
-        $this->assertEquals([],$userCards);
+        $this->assertEquals([], $bankCards);
+        $this->assertEquals([], $userCards);
 
         //Checks that cards are added
         $game->drawUserCard();
-        $game->drawBankCard(); 
+        $game->drawBankCard();
         $userCards = $game->getUserCards();
         $bankCards = $game->getBankCards();
-        $this->assertInstanceOf("\App\Card\Card",$bankCards[0]);
-        $this->assertInstanceOf("\App\Card\Card",$userCards[0]);
+        $this->assertInstanceOf("\App\Card\Card", $bankCards[0]);
+        $this->assertInstanceOf("\App\Card\Card", $userCards[0]);
     }
 
 
@@ -47,10 +47,10 @@ class GameTest extends TestCase
     {
         $game = new Game();
         $game->drawUserCard();
-        $game->drawBankCard(); 
+        $game->drawBankCard();
 
-        $this->assertGreaterThan(0,$game->getUserPoints());
-        $this->assertGreaterThan(0,$game->getBankPoints());
+        $this->assertGreaterThan(0, $game->getUserPoints());
+        $this->assertGreaterThan(0, $game->getBankPoints());
     }
 
     /**
@@ -59,10 +59,10 @@ class GameTest extends TestCase
     public function testWinnerAndTurn()
     {
         $game = new Game();
-        $this->assertEquals("",$game->getWinner());
-        $this->assertEquals("user",$game->getTurn());
+        $this->assertEquals("", $game->getWinner());
+        $this->assertEquals("user", $game->getTurn());
         $game->userStop();
-        $this->assertEquals("bank",$game->getTurn());
+        $this->assertEquals("bank", $game->getTurn());
     }
 
     /**
@@ -79,14 +79,14 @@ class GameTest extends TestCase
 
         $game = new Game();
 
-        $this->assertEquals("user",$game->getTurn());
+        $this->assertEquals("user", $game->getTurn());
 
         $game->drawUserCard($stubCard);
         $game->drawUserCard($stubCard);
         $game->drawUserCard($stubCard);
 
-        $this->assertEquals(21,$game->getUserPoints());
-        $this->assertEquals("bank",$game->getTurn());
+        $this->assertEquals(21, $game->getUserPoints());
+        $this->assertEquals("bank", $game->getTurn());
     }
 
     /**
@@ -103,14 +103,14 @@ class GameTest extends TestCase
 
         $game = new Game();
 
-        $this->assertEquals("",$game->getWinner());
+        $this->assertEquals("", $game->getWinner());
 
         $game->drawUserCard($stubCard);
         $game->drawUserCard($stubCard);
         $game->drawUserCard($stubCard);
 
-        $this->assertEquals(24,$game->getUserPoints());
-        $this->assertEquals("bank",$game->getWinner());
+        $this->assertEquals(24, $game->getUserPoints());
+        $this->assertEquals("bank", $game->getWinner());
     }
 
     /**
@@ -127,14 +127,14 @@ class GameTest extends TestCase
 
         $game = new Game();
 
-        $this->assertEquals("",$game->getWinner());
+        $this->assertEquals("", $game->getWinner());
 
         $game->drawBankCard($stubCard);
         $game->drawBankCard($stubCard);
         $game->drawBankCard($stubCard);
 
-        $this->assertEquals(21,$game->getBankPoints());
-        $this->assertEquals("bank",$game->getWinner());
+        $this->assertEquals(21, $game->getBankPoints());
+        $this->assertEquals("bank", $game->getWinner());
     }
 
 
@@ -152,14 +152,14 @@ class GameTest extends TestCase
 
         $game = new Game();
 
-        $this->assertEquals("",$game->getWinner());
+        $this->assertEquals("", $game->getWinner());
 
         $game->drawBankCard($stubCard);
         $game->drawBankCard($stubCard);
         $game->drawBankCard($stubCard);
 
-        $this->assertEquals(24,$game->getBankPoints());
-        $this->assertEquals("user",$game->getWinner());
+        $this->assertEquals(24, $game->getBankPoints());
+        $this->assertEquals("user", $game->getWinner());
     }
 
     /**
@@ -179,7 +179,7 @@ class GameTest extends TestCase
 
         $game = new Game();
 
-        $this->assertEquals("",$game->getWinner());
+        $this->assertEquals("", $game->getWinner());
 
         $game->drawUserCard($stubCard5);
         $game->drawUserCard($stubCard5);
@@ -189,9 +189,9 @@ class GameTest extends TestCase
         $game->drawBankCard($stubCard6);
         $game->drawBankCard($stubCard6);
 
-        $this->assertEquals(15,$game->getUserPoints());
-        $this->assertEquals(18,$game->getBankPoints());
-        $this->assertEquals("bank",$game->getWinner());
+        $this->assertEquals(15, $game->getUserPoints());
+        $this->assertEquals(18, $game->getBankPoints());
+        $this->assertEquals("bank", $game->getWinner());
     }
 
     /**
@@ -211,7 +211,7 @@ class GameTest extends TestCase
 
         $game = new Game();
 
-        $this->assertEquals("",$game->getWinner());
+        $this->assertEquals("", $game->getWinner());
 
         $game->drawUserCard($stubCard7);
         $game->drawUserCard($stubCard7);
@@ -221,9 +221,8 @@ class GameTest extends TestCase
         $game->drawBankCard($stubCard6);
         $game->drawBankCard($stubCard6);
 
-        $this->assertEquals(21,$game->getUserPoints());
-        $this->assertEquals(18,$game->getBankPoints());
-        $this->assertEquals("user",$game->getWinner());
+        $this->assertEquals(21, $game->getUserPoints());
+        $this->assertEquals(18, $game->getBankPoints());
+        $this->assertEquals("user", $game->getWinner());
     }
-
 }
