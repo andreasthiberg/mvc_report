@@ -1,0 +1,11 @@
+{# templates/books/books-home.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Bibliotek{% endblock %}
+{% block content %}
+    <h2>Välkommen till biblioteket</h2>
+    <ul>
+        <li><a href="{{ path("books-create")}}">Skapa en bok</a></li>
+        <li><a href="{{ path("books-show") }}">Se alla böcker</a></li>
+    </ul>
+{% endblock %}

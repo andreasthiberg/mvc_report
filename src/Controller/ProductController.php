@@ -85,6 +85,28 @@ class ProductController extends AbstractController
     $entityManager->flush();
 
     return $this->redirectToRoute('product_show_all');
+    }
+    /**
+ * @Route("/product/update/{id}/{value}", name="product_update")
+ */
+public function updateProduct(
+    ManagerRegistry $doctrine,
+    int $id,
+    int $value
+): Response {
+    $entityManager = $doctrine->getManager();
+    $product = $entityManager->getRepository(Product::class)->find($id);
+
+    if (!$product) {
+        throw $this->createNotFoundException(
+            'No product found for id '.$id
+        );
+    }
+
+    $product->setValue($value);
+    $entityManager->flush();
+
+    return $this->redirectToRoute('product_show_all');
 }
 
 }

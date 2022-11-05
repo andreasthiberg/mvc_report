@@ -1,0 +1,23 @@
+{# templates/books/books-update.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Bibliotek{% endblock %}
+{% block content %}
+    <h2>Uppdatera </h2>
+
+    <form onsubmit="return confirm('Är du säker?');" method="post">
+        <label for="btitle">Boktitel:</label><br>
+        <input required type="text" id="btitle" name="btitle" value="{{book.title}}"><br>
+        <label for="bauthor">Författare:</label><br>
+        <input required type="text" id="bauthor" name="bauthor" value="{{book.author}}"><br>
+        <label for="bisbn">ISBN:</label><br>
+        <input required type="text" id="bisbn" name="bisbn" value="{{book.isbn}}"><br>
+        <label for="bimg">Bild-url:</label><br>
+        <input type="text" id="bimg" name="bimg" value="{{book.img}}"><br><br>
+        <button name="action" value="update" type="submit">Uppdatera bok</button>
+        <br><br>
+    </form>
+    <form onsubmit="return confirm('Är du säker?');" method="post">
+        <button name="action" value="remove" type="submit">Ta bort bok</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,20 @@
+{# templates/books/books-show.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Bibliotek{% endblock %}
+{% block content %}
+    <a href="{{ path("books-home") }}">&#x3c;- Tillbaka</a>
+    <h2>Böcker i biblioteket</h2>
+    {% for book in books %}
+        <div class="single-book-container">
+        <a href="{{ path("books-show-single", {id: book.id} ) }}">{{book.title}}</a><br/>
+        Författare: {{book.author}}<br/>
+        ISBN: {{book.isbn}}<br/>
+        {% if book.img %}
+            <img alt="Bild som representerar boken"  class="list-book-image" src="{{book.img}}">
+        {% else %}
+            <div class="no-book-image">Ingen bild.</div>
+        {% endif %}
+        </div>
+    {% endfor %}
+{% endblock %}

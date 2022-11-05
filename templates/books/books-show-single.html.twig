@@ -1,0 +1,23 @@
+{# templates/books/books-show-single.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Bibliotek{% endblock %}
+{% block content %}
+
+    <a href="{{ path("books-show") }}">&#x3c;- Se alla böcker</a>
+
+    <h1>{{book.title}}</h1>
+    <div class="single-book-description">
+    Författare: {{book.author}}<br/>
+    ISBN: {{book.isbn}}<br/><br>
+    </div>
+    {% if book.img %}
+    <img alt="Bild som representerar boken"  class="single-book-image" src="{{book.img}}">
+    {% else %}
+        Ingen bild.
+    {% endif %}
+    <br><br>
+    <a style="font-size: 18px;" href="{{ path("books-update", {id: book.id} ) }}">Uppdatera eller ta bort boken</a>
+    <br><br>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{# templates/books/books-create.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Bibliotek{% endblock %}
+{% block content %}
+    <h2>Skapa bok</h2>
+    <form method="post">
+        <label for="btitle">Boktitel:</label><br>
+        <input required type="text" id="btitle" name="btitle"><br>
+        <label for="bauthor">Författare:</label><br>
+        <input required type="text" id="bauthor" name="bauthor"><br>
+        <label for="bisbn">ISBN:</label><br>
+        <input required type="text" id="bisbn" name="bisbn"><br>
+        <label for="bimg">Bild-url:</label><br>
+        <input type="text" id="bimg" name="bimg"><br>
+        <input type="submit" value="Skapa bok">
+    </form>
+{% endblock %}
