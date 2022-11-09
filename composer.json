@@ -89,7 +89,7 @@
         "symfony/polyfill-php80": "*"
     },
     "scripts": {
-        "phpunit": "XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-html build/coverage",
+        "phpunit": "XDEBUG_MODE=coverage vendor/bin/phpunit",
         "phpdoc": "tools/phpdoc/phpdoc -d ./src -t ./docs/api",
         "csfix": "tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src",
         "phpcs": "tools/php-codesniffer/vendor/bin/phpcs --standard=PSR12 src",
