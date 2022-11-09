@@ -4,6 +4,7 @@ body {
     margin: 0;
     background-color: rgb(245, 244, 241);
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 18px;
 }
 
 #page-div {
