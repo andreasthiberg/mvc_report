@@ -34,22 +34,24 @@ class BooksController extends AbstractController
         $data = [
             'books' => $books
         ];
-    
-        return $this->render('books/books-show.html.twig', $data); 
+
+        return $this->render('books/books-show.html.twig', $data);
     }
 
     /**
      * @Route("/books/create", name="books-create", methods={"GET"})
      */
-    public function createBook(): Response {
-        return $this->render('books/books-create.html.twig'); 
+    public function createBook(): Response
+    {
+        return $this->render('books/books-create.html.twig');
     }
 
     /**
      * @Route("/books/create", name="books-create-handler", methods={"POST"})
      */
     public function createBookHandler(
-        ManagerRegistry $doctrine, Request $request
+        ManagerRegistry $doctrine,
+        Request $request
     ): Response {
         $entityManager = $doctrine->getManager();
 
@@ -82,7 +84,7 @@ class BooksController extends AbstractController
             'book' => $book
         ];
 
-        return $this->render('books/books-show-single.html.twig', $data); 
+        return $this->render('books/books-show-single.html.twig', $data);
     }
 
     /**
@@ -99,14 +101,17 @@ class BooksController extends AbstractController
             'book' => $book
         ];
 
-        return $this->render('books/books-update.html.twig', $data); 
+        return $this->render('books/books-update.html.twig', $data);
     }
 
     /**
      * @Route("/books/update/{id}", name="books-update-handler", methods={"POST"})
      */
     public function updateBookHandler(
-        BooksRepository $booksRepository, ManagerRegistry $doctrine, Request $request, int $id
+        BooksRepository $booksRepository,
+        ManagerRegistry $doctrine,
+        Request $request,
+        int $id
     ): Response {
         $entityManager = $doctrine->getManager();
 
@@ -115,16 +120,16 @@ class BooksController extends AbstractController
 
         $action = $request->request->get('action');
 
-        if($action == "remove"){
+        if ($action == "remove") {
             if (!$book) {
                 throw $this->createNotFoundException(
-                    'No product found for id '.$id
+                    'No product found for id ' . $id
                 );
             }
-        
+
             $entityManager->remove($book);
             $entityManager->flush();
-        
+
             return $this->redirectToRoute('books-show');
         }
 
@@ -137,9 +142,6 @@ class BooksController extends AbstractController
 
         $entityManager->flush();
 
-        return $this->redirectToRoute('books-show-single', ["id" => $id] );
+        return $this->redirectToRoute('books-show-single', ["id" => $id]);
     }
 }
-
-
-
