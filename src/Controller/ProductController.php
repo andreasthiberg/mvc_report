@@ -106,7 +106,7 @@ public function updateProduct(
     $product->setValue($value);
     $entityManager->flush();
 
-    return $this->redirectToRoute('product_show_all');
+    return $this->redirectToRoute('product_show_all',);
 }
 
 }
