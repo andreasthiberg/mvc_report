@@ -58,7 +58,7 @@ class BooksController extends AbstractController
         // Create new book from post request
         $book = new Books();
 
-        
+
         $book->setTitle($request->request->get('btitle'));
         $book->setAuthor($request->request->get('bauthor'));
         $book->setISBN($request->request->get('bisbn'));
