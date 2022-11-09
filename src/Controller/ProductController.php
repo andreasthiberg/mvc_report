@@ -99,13 +99,13 @@ class ProductController extends AbstractController
 
         if (!$product) {
             throw $this->createNotFoundException(
-                'No product found for id '.$id
+                'No product found for id ' . $id
             );
         }
 
         $product->setValue($value);
         $entityManager->flush();
 
-        return $this->redirectToRoute('product_show_all', );
+        return $this->redirectToRoute('product_show_all');
     }
 }
