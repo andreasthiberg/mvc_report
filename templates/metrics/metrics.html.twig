@@ -4,10 +4,58 @@
 {% block title %}Me-sida{% endblock %}
 {% block content %}
     <h1>Metrics</h1>
-    <h2>Introduktion</h2>
+        <h2>Introduktion</h2>
+    <p>De "fyra C:na" är fyra olika koncept relaterade till analys av kodens kvalitet. De är som följer:</p>
+
+    <ul>
+    <li>Coverage</li>
+    <li>Complexity</li>
+    <li>Cohesion</li>
+    <li>Coupling</li>
+    </ul>
+    <p>
+    <i>Coverage</i> handlar om hur mycket av koden som testas, det vill säga den kod som
+    körs av något tillgängligt test. Hög coverage är helt enkelt bra då det minskar risken för oupptäckta buggar och problem. Code Coverage anges oftas som ett procenttal,
+    som också kan delas upp i mindre kategorier (exempelvis function code coverage).
+    <p><i>Complexity</i> - kodens komplexitet - baseras på hur många möjliga vägar som programmet kan ta genom koden. Detta påverkas till exempel av mängden conditionals (if-statements osv)
+    - för ett program helt utan sådana val är komplexiteten lika med 1. Komplex kod är svårare att testa och underhålla - man vill därför undvika för höga siffror. De filer som analyseras i den här appen
+    har en komplexitet på mellan 1 och 18.
+    </p>
+    <p><i>Cohesion</i> handlar om i vilken grad element i en modul "hänger ihop". Särskilt gäller det här sambandet mellan metoder och data i en klass. Här är det bra med hög cohesion - en klass som utför ett enstaka tydligt syfte snarare
+    än flera. Värdet ges från 0 och 1, där 1 är bäst. 
+    <p><i>Coupling</i> står avslutningsvis för graden av beroende mellan olika moduler, till exempel klasser. I allmänhet är det bättre med låg coupling - det minskar risken för att problem i en modul orsakar problem i andra.
+    Här finns några olika metrics: Efferent coupling beskriver hur många klasser som en klass är beroende av, afferent coupling står tvärtom för hur många klasser som är beroende av en särskild klass.
+    Genom att kombinera dessa kan man få ett instability index mellan 0 och 1 som visar hur stabil en klass är (1 är instabilt)
+    </p>
+
     <h2>Phpmetrics</h2>
+    <p>Phpmetrics rapport ger information om Complexity och om Coupling. Dels analyseras varje moduls komplexitet (i mitt fall klasser). Några klasser har komplexitet som kryper över 10 - den högsta är klassen Card med 13. 
+    Här finns det möjligen en chans till förbättring. Om man tittar på klassen så blir det tydligt att komplexitet beror på ett gäng if-satser som väljer strängar baserat på kortets färg och valör. Det han kunnat lösas på ett bättre sätt som inte innebär så många vägar genom koden, samtidigt
+    som det kanske inte är något enormt problem för kodens kvalitet eftersom det handlar om så simpla operationer. De controllers som har lite hög komplexitet skulle kunna delas upp i flera olika.
+    <p>Rapporten analyserar också coupling för alla klasser. Klasserna Card och Deck har båda 4 i Afferent coupling, och fyra klasser är alltså beroende av dem - vilket är naturligt då de är grundbeståndsdelarna i kortspelet. Det största problemet är dock kanske
+    den höga instabiliteten hos Game-klassen - den känns dock svår att minska i och med att den "styr" hela spelet.
+    <p>Mätvärdet "maintainability index", ger en ytterligare indikation på att klasserna Card och Game kanske skulle gå att förbättra då de har låga (dåliga) index. Kanske kan de delas upp eller kortas ned?
+
     <h2>Scrutinizer</h2>
+    <p>Rapporten ger här data om Coverage och Complexity. När det gäller Coverage så får min app ett lågt tal - 36% -  men det beror helt enkelt på att även komponenter som jag inte har skrivit tester för har tagits med. För mina klasser är Coverage 100%. Ett alternativ för att förbättra siffran hade varit
+    att skriva tester för mina Controllers - eller att exkludera dem från analysen!
+    Komplexiteten stämmer överens med den som fås av Phpmetrics - även om siffrorna här är lite annorlunda av någon anledning: klassen Game har exempelvis 18 istället för 13. Tendensen är dock samma: Card och Game är störst. 
+    Dessa siffror verkar inte vara något stort problem (alla klasser får betyget A i rapporten) men det skulle som sagt gå att minska med lite ändringar/uppdelningar i koden.
+    <p>Slutligen så visar analysen ett mätvärde för varje klass storlek och "duplication", alltså kod som skrivs flera gånger i onödan. Duplicated lines verkar alltid lika på 0% i min app. De största klasserna är Game och Deck - ett tecken på att Game skulle kunna delas upp för att få ner komplexiteten.   
+
     <h2>Förbättringar</h2>
+
+    <h3>Förslag</h3>
+    <p>Det är en liten utmaning att hitta förbättrningar eftersom det är ganska lite kod, och eftersom koden redan når höga betyg på Scrutinizer. Här är dock tre försök:
+    <ul>
+    <li>Ändra strukturen i klassen Card för att få ned komplexiteten - vissa if-satser är eventuellt onödiga</li>
+    <li>Försök ändra i besluts-strukturen i Game för att få ned komplexiteten - här är jag dock osäker på vad som kan göras.</li>
+    <li>Bryta ut några metoder i Game-klassen till en ny klass för att minska komplexiteten.</li>
+    </ul>
+
+    <h3>Resultat</h3>
+    
+
     <h2>Diskussion</h2>
 
 {% endblock %}
