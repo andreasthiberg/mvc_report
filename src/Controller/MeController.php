@@ -31,4 +31,12 @@ class MeController extends AbstractController
     {
         return $this->render('report.html.twig');
     }
+
+    /**
+     * @Route("/metrics", name="metrics")
+     */
+    public function metrics(): Response
+    {
+        return $this->render('metrics/metrics.html.twig');
+    }
 }
