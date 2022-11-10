@@ -4,6 +4,7 @@ namespace App\Card;
 
 use App\Card\Player;
 use App\Card\Deck;
+use App\Card\GameCalculation;
 
 class Game
 {
@@ -90,17 +91,9 @@ class Game
         }
         $this->bank->giveCard($drawnCards[0]);
         $this->bankPoints = $this->bank->getHand()->getPoints();
-        if ($this->bankPoints == 21) {
-            $this->winner = "bank";
-        } elseif ($this->bankPoints > 21) {
-            $this->winner = "user";
-        } elseif ($this->bankPoints >= 17) {
-            if ($this->userPoints <= $this->bankPoints) {
-                $this->winner = "bank";
-            } else {
-                $this->winner = "user";
-            }
-        }
+
+        $calc = new GameCalculation();
+        $this->winner = $calc->calculateWinner($this->bankPoints,$this->userPoints);
     }
 
     public function drawUserCard(Card $presetCard = null): void

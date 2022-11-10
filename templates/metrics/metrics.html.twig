@@ -47,14 +47,19 @@
 
     <h3>Förslag</h3>
     <p>Det är en liten utmaning att hitta förbättrningar eftersom det är ganska lite kod, och eftersom koden redan når höga betyg på Scrutinizer. Här är dock tre försök:
-    <ul>
+    <ol>
     <li>Ändra strukturen i klassen Card för att få ned komplexiteten - vissa if-satser är eventuellt onödiga</li>
     <li>Försök ändra i besluts-strukturen i Game för att få ned komplexiteten - här är jag dock osäker på vad som kan göras.</li>
     <li>Bryta ut några metoder i Game-klassen till en ny klass för att minska komplexiteten.</li>
-    </ul>
+    </ol>
 
     <h3>Resultat</h3>
-    
+    <ol>
+        <li>Att ändra till Arrays med nycklar och värden istället för flera if-satser fungerade bra för Card-klassen. Det fick ned komplexiteten från 13 till 5.
+        <li>Här blev det ett misslyckade - jag försökte fila bort if-satser från Game-klassen men alla verkar nödvändiga - till skillnad från i Card-klassen.</li>
+        <li>Här lyckades jag bättre - genom att flytta logiken för att räkna ut en vinnare baserat på poäng till en hjälp-klass så minskade komplexiteten hos Game från 9 till 5.
+        Dock så är jag inte säker på om detta var en bra idé - att introducera fler klasser ökar ju instabilitetsindex. Eventuellt hade det varit mer relevant om Game hade haft en väldigt hög komplexitet - nu var den ju redan godkänd.</li>
+    </ol>
 
     <h2>Diskussion</h2>
 
