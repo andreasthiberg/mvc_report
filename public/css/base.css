@@ -130,7 +130,7 @@ body {
 
 .player-cards-container {
     padding: 10px;
-    height: 250px;
+    height: 270px;
     background-color: rgb(200, 187, 170);
 }
 
@@ -140,6 +140,7 @@ body {
 }
 
 .info-container {
+    margin-top: 20px;
     font-size: 30px;
     padding: 20px;
     grid-column-start: 1;
