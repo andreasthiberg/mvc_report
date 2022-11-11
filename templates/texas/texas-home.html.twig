@@ -1,0 +1,11 @@
+{# templates/texas-home.html.twig #}
+{% extends 'baseProject.html.twig' %}
+
+{% block title %}Projekt - Hem{% endblock %}
+{% block content %}
+    <h1>Välkommen!</h1>
+    <p>Hej! Projekt</p>
+        <ul>
+        <li><a href="{{ path("texas-about") }}">Om projektet</a></li>
+        <li><a href="{{ path("texas-play") }}">Spela Texas holdem</a></li>
+{% endblock %}

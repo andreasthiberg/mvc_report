@@ -10,11 +10,11 @@
         {% endblock %}
     </head>
     <body>
-        <div id="page-div">
-            <div id="header">
-            <a id="header-title">Kursen MVC - Andreas Thiberg</a>
+        <div id="poker-page-div" class="page-div">
+            <div id="poker-header" class="header">
+            <a id="header-title">MVC - Pokerspel</a>
             </div>
-            <div class="navbar">
+            <div id="poker-navbar" class="navbar">
                     <ul>
                         <li><a href="{{ path("home")}}">Hem</a></li>
                         <li><a href="{{ path("about") }}">Om</a></li>
@@ -27,11 +27,11 @@
                     </ul>
             </div>
 
-            <div class="content">
+            <div id="poker-content" class="content">
                 {% block content %}{% endblock %}
             </div>
 
-            <div class="footer">
+            <div id="poker-footer" class="footer">
                 Copyright Andreas Thiberg 2022.
             </div>
         </div>

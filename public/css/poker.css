@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap');
+
+#poker-navbar {
+    background-color: #410B13;
+    color: white;
+    font-size: 20px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 100;
+    text-align: center;
+}
+
+#poker-navbar ul li:hover {
+    background-color: rgb(5, 63, 21);
+}
+
+#poker-header {
+    text-align: center;
+    font-family: 'Berkshire Swash', cursive;
+    background-color: #2F4B26;
+    color: white;
+}
+
+#poker-footer {
+    background-color: #2F4B26;
+    color: white;
+}
+
+#poker-page-div {
+    background-color: #CDDFA0;
+}
+
+#poker-content {
+    background-color: rgb(255, 255, 255);
+    padding: 50px;
+}

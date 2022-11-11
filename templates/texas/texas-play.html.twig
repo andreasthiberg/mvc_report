@@ -1,0 +1,21 @@
+{# templates/poker/texas-play.html.twig #}
+{% extends 'baseProject.html.twig' %}
+
+{% block title %}Me-sida{% endblock %}
+{% block content %}
+    <h1>Texas hold'em</h1>
+    <div class="texas-game-container">
+    </div>
+ 
+    <div class="info-container">
+    </div>
+    <div class="button-container">
+    <form method="post">
+                <button name="action" value="user-draw" type="submit">Dra ett kort</button>
+                <button name="action" value="user-stop" type="submit">Stanna</button>
+                <button name="action" value="bank-draw" type="submit">Banken drar ett kort</button>
+                <button name="action" value="restart" type="submit">Börja om</button>
+    </form>
+    </div>
+    </div>
+{% endblock %}

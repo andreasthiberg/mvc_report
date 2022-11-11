@@ -1,4 +1,5 @@
 @import url("library.css");
+@import url("poker.css");
 
 body {
     margin: 0;
@@ -7,14 +8,14 @@ body {
     font-size: 18px;
 }
 
-#page-div {
+.page-div {
     position: relative;
     min-height: 100vh;
 }
 
 /*Header */
 
-#header {
+.header {
     background-color: rgb(122, 187, 192);
     height: 80px;
     overflow: auto;
@@ -25,38 +26,39 @@ body {
     display: block;
     margin-left: 20px;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 /* Navbar */
 
-#navbar {
+.navbar {
     background-color: #3f3f3f;
 }
 
-#navbar ul {
+.navbar ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     text-decoration: none;
 }
 
-#navbar ul li:hover {
+.navbar ul li:hover {
     background-color: rgb(74, 141, 146);
 }
 
-#navbar ul li {
+.navbar ul li {
     display: inline-block;
     padding: 10px;
 }
 
-#navbar a {
+.navbar a {
     text-decoration: none;
     color: #fff;
 }
 
 /* Content */
 
-#content {
+.content {
     margin: auto;
     max-width: 800px;
     padding-left: 20px;
@@ -67,7 +69,7 @@ body {
 
 /* Footer */
 
-#footer {
+.footer {
     height: 30px;
     padding: 10px;
     background-color: rgb(122, 187, 192);

@@ -2,10 +2,13 @@
 
 namespace App\Card;
 
+use App\Card\CardHand;
+
 class GameCalculation {
+
     /**
      *
-     * Calculates winner based on input
+     * Calculates winner based on bank and player points in 21
      *
      * @return string
     */
@@ -25,4 +28,17 @@ class GameCalculation {
         }
         return $winner;
     }
+
+    /**
+     *
+     * Calculates maximum points for a texas hold'em hand
+     *
+     * @return int
+    */
+    public function calculateTexasPoints(CardHand $hand)
+    {
+        $points = 0;
+        return $points;
+    }
+
 }
