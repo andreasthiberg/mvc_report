@@ -92,6 +92,19 @@ Jag upprepar det jag skrev ovan - ORM är lite av en lättnad i jämförelse med
 <h3>Vilken är din TIL för detta kmom?</h3>
 Kanske snarare "TIRemembered" - men efter att ha jobbat med MongoDB och MariaDB i några kurser så hade jag glömt hur smidigt det är med SQLIite för lite mindre projekt.
 
+<h2>Kmom06</h2>
+<h3>Hur uppfattade du verktyget phpmetrics och fann du några särskilda bitar mer värdefulla än andra? Var det några särskilda metrics eller bilder du uppskattade?</h3>
+Verktyget var lite förvirrande i början, men när jag fick grepp om det så verkade det användbart.
+I mitt fall var det mest användbart för att analysera de olika klassernas komplexitet - presentationen av "storleken" för varje klass var onekligen tydlig. Något jag inte riktigt begriper är hur varje klass "Maintainability index" räknas ut - jag trodde att det skulle minska när jag fick ned komplexiteten, men så blev det inte. Jag får återkomma till det i projektet. 
+
+<h3>Berätta hur det gick att integrera med Scrutinizer och vilken är din första känsla av verktyget och dess badges? Vilken kodtäckning och kodkvalitet fick du efter första bygget?</h3>
+Det gick bra, även om det strulade lite i början - jag var tvungen att manuellt ange en vissa PHP-version i config-filen för att analysen inte skulle krascha. När det väl fungerade så gick det dock smidigt. Egentligen fanns det dock inte jättemycket att hämta i just det här fallet - jag fick 10 poäng direkt, och den låga Coverage-siffran berodde bara på att jag inte hade för avsikt att testa mina Controllers och ORM-klasser. Hur som helst så kändes det nyttigt att lära sig, och det blir säkert användbart för kommande utveckling.
+
+<h3>Hur är din egen syn på kodkvalitet, berätta lite om den? Tror du man kan man påvisa kodkvalitet i någon viss mån med badges eller vad tror du?</h3>
+På ett sätt känns kodkvalitet ganska tydligt - ett gäng olika mätvärden räknas ihop och så får man ett betyg. Jag tror att den typen av "trubbig" analys räcker ganska långt i många fall: Målet är ju oftast inte att skriva perfekt kod, utan snarare att åtgärda stora brister i hur ett program är uppbyggt. I det avseendet fungerar också badges som någon sorts kvalitetsgaranti. Å andra sidan så tror jag inte att man ska stirra sig blind på betyg/badges. Mina testfall tydliggjorde att ett alltför nitiskt följande av mätvärden snarare kan göra koden mindre intuitiv och läsbar. Det finns säkert också många typer av system som analysverktygen inte riktigt kan tolka ordentligt. Men de fungerar onekligen bra som en utgångspunkt när man vill skriva bra kod.
+
+<h3>Vilken är din TIL för detta kmom?</h3>
+Av de fyra C:na så tyckte jag särskilt Coupling kändes nytt och intressant. Även om man skriver modulärt (som vi har lärt oss) så blir det ju lätt långa kedjor av klasser som är beroende av varandra, och som därför blir känsliga för förändringar. Jag hade velat tittat närmare på hur man ska förhålla sig till sådana problem.
 
 
 {% endblock %}
