@@ -11,13 +11,13 @@ class Books
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private ?int $bookId = null;
 
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $ISBN = null;
+    private ?string $isbn = null;
 
     #[ORM\Column(length: 255)]
     private ?string $author = null;
@@ -27,7 +27,7 @@ class Books
 
     public function getId(): ?int
     {
-        return $this->id;
+        return $this->bookId;
     }
 
     public function getTitle(): ?string
@@ -42,14 +42,14 @@ class Books
         return $this;
     }
 
-    public function getISBN(): ?string
+    public function getIsbn(): ?string
     {
-        return $this->ISBN;
+        return $this->isbn;
     }
 
-    public function setISBN(string $ISBN): self
+    public function setIsbn(string $isbn): self
     {
-        $this->ISBN = $ISBN;
+        $this->isbn = $isbn;
 
         return $this;
     }

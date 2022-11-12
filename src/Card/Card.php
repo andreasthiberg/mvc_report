@@ -2,6 +2,10 @@
 
 namespace App\Card;
 
+/**
+ *
+ * @SuppressWarnings(PHPMD.ElseExpression)
+ */
 class Card
 {
     private string $suit ;
@@ -43,7 +47,7 @@ class Card
             "1" => "A",
         );
 
-        if(array_key_exists(strval($this->rank), $rankStringArray)){
+        if (array_key_exists(strval($this->rank), $rankStringArray)) {
             return $rankStringArray[strval($this->rank)];
         } else {
             return strval($this->rank);

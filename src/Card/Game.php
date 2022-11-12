@@ -6,6 +6,11 @@ use App\Card\Player;
 use App\Card\Deck;
 use App\Card\GameCalculation;
 
+/**
+ *
+ * @SuppressWarnings(PHPMD.ElseExpression)
+ */
+
 class Game
 {
     private Player $user;
@@ -93,7 +98,7 @@ class Game
         $this->bankPoints = $this->bank->getHand()->getPoints();
 
         $calc = new GameCalculation();
-        $this->winner = $calc->calculateWinner($this->bankPoints,$this->userPoints);
+        $this->winner = $calc->calculateWinner($this->bankPoints, $this->userPoints);
     }
 
     public function drawUserCard(Card $presetCard = null): void

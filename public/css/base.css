@@ -9,7 +9,6 @@ body {
 }
 
 .page-div {
-    position: relative;
     min-height: 100vh;
 }
 
@@ -70,10 +69,10 @@ body {
 /* Footer */
 
 .footer {
-    height: 30px;
+    height: 20px;
     padding: 10px;
     background-color: rgb(122, 187, 192);
-    position: absolute;
+    position: fixed;
     left: 0;
     right: 0;
     bottom: 0;
@@ -88,13 +87,14 @@ body {
 }
 
 .card {
-    font-size: 22px;
+    font-size: 26px;
+    color: black;
     background-color: white;
     margin: 5px;
     border: solid;
     border-width: 1px;
-    width: 30px;
-    height: 50px;
+    width: 40px;
+    height: 60px;
     text-align: center;
     vertical-align: middle;
 }
@@ -108,7 +108,7 @@ body {
 }
 
 .game-container .card-container {
-    height: 60px;
+    height: 80px;
     margin-top: 10px;
 }
 
@@ -132,7 +132,7 @@ body {
 
 .player-cards-container {
     padding: 10px;
-    height: 270px;
+    height: 310px;
     background-color: rgb(200, 187, 170);
 }
 
@@ -142,7 +142,7 @@ body {
 }
 
 .info-container {
-    margin-top: 20px;
+    margin-top: 50px;
     font-size: 30px;
     padding: 20px;
     grid-column-start: 1;

@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap');
 
+
+/* Poker site design */
 #poker-navbar {
+    height: 45px;
+    width: 100%;
     background-color: #410B13;
     color: white;
     font-size: 20px;
@@ -9,6 +13,9 @@
     text-align: center;
 }
 
+#poker-navbar ul li {
+    height: 25px;
+}
 #poker-navbar ul li:hover {
     background-color: rgb(5, 63, 21);
 }
@@ -18,6 +25,7 @@
     font-family: 'Berkshire Swash', cursive;
     background-color: #2F4B26;
     color: white;
+    width: 100%;
 }
 
 #poker-footer {
@@ -29,7 +37,89 @@
     background-color: #CDDFA0;
 }
 
+
 #poker-content {
-    background-color: rgb(255, 255, 255);
-    padding: 50px;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 100%;
+    margin: 0;
+    display: grid;
+    grid-template-rows: 100px 360px 100px;
+    grid-template-columns: 200px 800px 200px;
+    background-color: #CDDFA0;
+    padding: 30px;
+}
+
+/* Game style */
+
+.texas-title {
+    width: 100%;
+    text-align: center;
+    font-family: 'Berkshire Swash', cursive;
+    grid-row: 1 / 2;
+    grid-column: 2 / 3;
+}
+
+.texas-game-container {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    border: solid;
+    border-width: 5px;
+    border-color: #3e2909;
+    color: white;
+    font-weight: 50;
+    width: 790px;
+    height: 350px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: #2F4B26;
+}
+
+
+.texas-card-container {
+    margin: 20px;
+    height: 50px;
+    justify-content: center;
+    display: flex;
+    width: 100%;
+}
+
+.texas-button-container {
+    grid-row: 3 / 4;
+    grid-column: 2 / 3;
+    margin-top: 30px;
+}
+
+.texas-button-container form {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.texas-button-container button {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 16px;
+    height: 40px;
+    width: 160px;
+    background-color: #ccd9c7;
+    cursor: pointer;
+}
+
+.texas-button-container button:hover {
+    background-color: #597d4d;
+}
+
+.bet-container {
+    padding: 10px;
+    width: 100%;
+    text-align: left;
+}
+
+.texas-info-container {
+    font-size: 18px;
+    grid-row: 2 / 3;
+    grid-column: 3 / 4;
+    width: 300px;
+    margin-left: 20px;
 }

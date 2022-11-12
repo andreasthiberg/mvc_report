@@ -61,7 +61,7 @@ class BooksController extends AbstractController
 
         $book->setTitle($request->request->get('btitle'));
         $book->setAuthor($request->request->get('bauthor'));
-        $book->setISBN($request->request->get('bisbn'));
+        $book->setIsbn($request->request->get('bisbn'));
         $book->setImg($request->request->get('bimg'));
 
         $entityManager->persist($book);
@@ -76,10 +76,10 @@ class BooksController extends AbstractController
      */
     public function showBookById(
         BooksRepository $booksRepository,
-        int $id
+        int $bookId
     ): Response {
         $book = $booksRepository
-            ->find($id);
+            ->find($bookId);
 
         $data = [
             'book' => $book
@@ -93,10 +93,10 @@ class BooksController extends AbstractController
      */
     public function updateBook(
         BooksRepository $booksRepository,
-        int $id
+        int $bookId
     ): Response {
         $book = $booksRepository
-            ->find($id);
+            ->find($bookId);
 
         $data = [
             'book' => $book
@@ -112,19 +112,19 @@ class BooksController extends AbstractController
         BooksRepository $booksRepository,
         ManagerRegistry $doctrine,
         Request $request,
-        int $id
+        int $bookId
     ): Response {
         $entityManager = $doctrine->getManager();
 
         $book = $booksRepository
-            ->find($id);
+            ->find($bookId);
 
         $action = $request->request->get('action');
 
         if ($action == "remove") {
             if (!$book) {
                 throw $this->createNotFoundException(
-                    'No product found for id ' . $id
+                    'No product found for id ' . $bookId
                 );
             }
 
@@ -136,13 +136,13 @@ class BooksController extends AbstractController
 
         $book->setTitle($request->request->get('btitle'));
         $book->setAuthor($request->request->get('bauthor'));
-        $book->setISBN($request->request->get('bisbn'));
+        $book->setIsbn($request->request->get('bisbn'));
         $book->setImg($request->request->get('bimg'));
 
         $entityManager->persist($book);
 
         $entityManager->flush();
 
-        return $this->redirectToRoute('books-show-single', ["id" => $id]);
+        return $this->redirectToRoute('books-show-single', ["id" => $bookId]);
     }
 }

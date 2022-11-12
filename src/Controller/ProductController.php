@@ -57,10 +57,10 @@ class ProductController extends AbstractController
      */
     public function showProductById(
         ProductRepository $productRepository,
-        int $id
+        int $prodId
     ): Response {
         $product = $productRepository
-            ->find($id);
+            ->find($prodId);
 
         return $this->json($product);
     }
@@ -70,14 +70,14 @@ class ProductController extends AbstractController
      */
     public function deleteProductById(
         ManagerRegistry $doctrine,
-        int $id
+        int $prodId
     ): Response {
         $entityManager = $doctrine->getManager();
-        $product = $entityManager->getRepository(Product::class)->find($id);
+        $product = $entityManager->getRepository(Product::class)->find($prodId);
 
         if (!$product) {
             throw $this->createNotFoundException(
-                'No product found for id ' . $id
+                'No product found for id ' . $prodId
             );
         }
 
@@ -91,15 +91,15 @@ class ProductController extends AbstractController
  */
     public function updateProduct(
         ManagerRegistry $doctrine,
-        int $id,
+        int $prodId,
         int $value
     ): Response {
         $entityManager = $doctrine->getManager();
-        $product = $entityManager->getRepository(Product::class)->find($id);
+        $product = $entityManager->getRepository(Product::class)->find($prodId);
 
         if (!$product) {
             throw $this->createNotFoundException(
-                'No product found for id ' . $id
+                'No product found for id ' . $prodId
             );
         }
 

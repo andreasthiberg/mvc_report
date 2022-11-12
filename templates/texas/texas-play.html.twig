@@ -2,20 +2,56 @@
 {% extends 'baseProject.html.twig' %}
 
 {% block title %}Me-sida{% endblock %}
+
 {% block content %}
-    <h1>Texas hold'em</h1>
+    <h1 class="texas-title">Texas hold'em</h1>
     <div class="texas-game-container">
+
+        
+
+        <div class="texas-card-container">
+        {% for card in bank_cards %}
+            {% if hand_over %}
+            <div class="card" ><span style="color:{{card.getColor()}}">{{card.getSymbol() }}</span><br>{{ card.getRankStringIncludingJoker()}} </div>
+            {% else %}
+                <div class="card" style="background-color:#0f187a" ></div>
+            {% endif %}
+        {% endfor %}
+        </div>
+
+        <div class="texas-card-container">
+        {% for card in table_cards %}
+            <div class="card" ><span style="color:{{card.getColor()}}">{{card.getSymbol() }}</span><br>{{ card.getRankStringIncludingJoker()}} </div>
+        {% endfor %}
+        </div>
+
+        <div class="texas-card-container">
+        {% for card in user_cards %}
+            <div class="card" ><span style="color:{{card.getColor()}}">{{card.getSymbol() }}</span><br>{{ card.getRankStringIncludingJoker()}} </div>
+        {% endfor %}
+        </div>
+        
+        <div class="bet-container">
+        Nuvarande marker: {{current_money}}<br>
+        Nuvarande satsning: {{current_bet}}
+        </div>
     </div>
- 
-    <div class="info-container">
-    </div>
-    <div class="button-container">
-    <form method="post">
-                <button name="action" value="user-draw" type="submit">Dra ett kort</button>
-                <button name="action" value="user-stop" type="submit">Stanna</button>
-                <button name="action" value="bank-draw" type="submit">Banken drar ett kort</button>
-                <button name="action" value="restart" type="submit">Börja om</button>
+    
+
+    <div class="texas-button-container">
+    <form class="texas-button-form" method="post">
+                <button {% if game_over %} disabled {% endif %} name="action" value="new-cards" type="submit">Dela</button>
+                <button {% if hand_over or game_over %} disabled {% endif %} name="action" value="bet" type="submit">Satsa pengar</button>
+                <button name="action" value="restart" type="submit">Nytt spel</button>
+
     </form>
+    
+    </div>
+    <div class="texas-info-container">
+        <span style="font-size: 24px">{{winner_string}}</span><br><br>
+        {{bank_combination}}<br>
+        {{user_combination}}<br><br>
+        {{bet_string}}<br>
     </div>
     </div>
 {% endblock %}

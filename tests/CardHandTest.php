@@ -36,6 +36,8 @@ class CardHandTest extends TestCase
         $this->assertEquals([$testCard1, $testCard2], $cardHand->getCards());
     }
 
+    
+
     /**
      * Add cards and verify that points are calculated correctly.
      */
@@ -65,5 +67,21 @@ class CardHandTest extends TestCase
         $cardHand->addCard($testCard3);
 
         $this->assertEquals(12, $cardHand->getPoints());
+    }
+
+    /**
+     * Try to sort cards in hand
+     */
+    public function testSortingCards()
+    {
+        $cardHand = new CardHand();
+        $testCard1 = new Card("Hearts", 11);
+        $testCard2 = new Card("Spades", 2);
+        $testCard3 = new Card("Clubs", 2);
+        $cardHand->addCard($testCard1);
+        $cardHand->addCard($testCard2);
+        $cardHand->addCard($testCard3);
+
+        $this->assertEquals([$testCard2, $testCard3, $testCard1], $cardHand->getCards());
     }
 }
