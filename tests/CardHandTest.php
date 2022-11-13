@@ -81,7 +81,8 @@ class CardHandTest extends TestCase
         $cardHand->addCard($testCard1);
         $cardHand->addCard($testCard2);
         $cardHand->addCard($testCard3);
+        $sortedCards = $cardHand->getRankSortedCards($cardHand);
 
-        $this->assertEquals([$testCard2, $testCard3, $testCard1], $cardHand->getCards());
+        $this->assertEquals([$testCard3, $testCard2, $testCard1], $sortedCards);
     }
 }

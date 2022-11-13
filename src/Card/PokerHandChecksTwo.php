@@ -28,21 +28,6 @@ class PokerHandChecksTwo
     }
 
     /**
-     * Gets only the suits of a card hand as an array
-     * @param array<Card> $sortedCards
-     * @return array<string>
-     */
-    public function getSuits($sortedCards)
-    {
-        $suitArray = [];
-        for ($y = 0; $y < 7; $y++) {
-            $suitArray[] = $sortedCards[$y]->getSuit();
-        }
-        return $suitArray;
-    }
-
-
-    /**
      * Checks cards for straight
      * @param array<Card> $sortedCards
      * @return mixed[]

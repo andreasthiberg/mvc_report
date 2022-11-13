@@ -45,6 +45,7 @@ class Card
             "12" => "Q",
             "11" => "J",
             "1" => "A",
+            "14" => "A",
         );
 
         if (array_key_exists(strval($this->rank), $rankStringArray)) {

@@ -16,7 +16,7 @@ class TexasGame
 {
     private Player $user;
     private Player $bank;
-    private Deck $deck;
+    private DeckWithAcesHigh $deck;
     private CardHand $tableCards;
 
     private int $currentBet;
@@ -27,7 +27,7 @@ class TexasGame
         $this->bank = new Player(2);
         $this->tableCards = new CardHand();
 
-        $this->deck = new Deck();
+        $this->deck = new DeckWithAcesHigh();
         $this->deck->shuffleDeck();
 
         $this->currentBet = 0;
@@ -73,58 +73,46 @@ class TexasGame
 
     /**
      *
-     * Gives a (possibly specified) card to user
+     * Gives a  card to user
      *
     */
-    public function giveCardToUser(Card $presetCard = null): void
+    public function giveCardToUser(): void
     {
-        //Optional preset cards as argument - otherwise draw
-        if (is_null($presetCard)) {
-            /**
-             * @var array<Card> drawn cards
-            */
-            $drawnCards = $this->deck->drawCards(1);
-        } else {
-            $drawnCards = [$presetCard];
-        }
+        
+        /**
+        * @var array<Card> drawn cards
+        */
+        $drawnCards = $this->deck->drawCards(1);
         $this->user->giveCard($drawnCards[0]);
     }
 
     /**
      *
-     * Gives a (possibly specified) card to bank
+     * Gives a card to bank
      *
     */
     public function giveCardToBank(Card $presetCard = null): void
     {
-        //Optional preset cards as argument - otherwise draw
-        if (is_null($presetCard)) {
-            /**
-             * @var array<Card> drawn cards
-            */
-            $drawnCards = $this->deck->drawCards(1);
-        } else {
-            $drawnCards = [$presetCard];
-        }
+        /**
+         * @var array<Card> drawn cards
+         */
+        $drawnCards = $this->deck->drawCards(1);
+
         $this->bank->giveCard($drawnCards[0]);
     }
 
     /**
      *
-     * Gives a (possibly specified) card to table cards
+     * Gives a card to table cards
      *
     */
-    public function giveCardToTable(Card $presetCard = null): void
+    public function giveCardToTable(): void
     {
-        //Optional preset cards as argument - otherwise draw
-        if (is_null($presetCard)) {
-            /**
-             * @var array<Card> drawn cards
-            */
-            $drawnCards = $this->deck->drawCards(1);
-        } else {
-            $drawnCards = [$presetCard];
-        }
+        /**
+         * @var array<Card> drawn cards
+        */
+        $drawnCards = $this->deck->drawCards(1);
+        
         $this->tableCards->addCard($drawnCards[0]);
     }
 
