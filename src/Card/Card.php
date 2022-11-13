@@ -3,11 +3,12 @@
 namespace App\Card;
 
 /**
- *
+ * Class representing a single playing card
  * @SuppressWarnings(PHPMD.ElseExpression)
  */
 class Card
 {
+
     private string $suit ;
     private int $rank;
     private string $color;
@@ -23,8 +24,12 @@ class Card
             $this->color = "blue";
         }
     }
-
-    public function getSymbol(): string
+    
+    /**
+     * Returns a symbol representing the suit of the card
+     * @return string 
+     */
+    public function getSymbol()
     {
         $suitSymbolArray = array(
             "Hearts" => "♥",
@@ -37,7 +42,11 @@ class Card
         return $suitSymbolArray[$this->suit];
     }
 
-    public function getRankStringIncludingJoker(): string
+    /**
+     * Returns a string representation of the card rank, with king as "K" etc.
+     * @return string 
+     */
+    public function getRankStringIncludingJoker()
     {
         $rankStringArray = array(
             "0" => "Jo",
@@ -55,17 +64,29 @@ class Card
         }
     }
 
-    public function getSuit(): string
+    /**
+     * Returns card suit.
+     * @return string 
+     */
+    public function getSuit()
     {
         return $this->suit;
     }
 
-    public function getRank(): int
+    /**
+     * Returns card rank.
+     * @return int 
+     */
+    public function getRank()
     {
         return $this->rank;
     }
 
-    public function getColor(): string
+    /**
+     * Returns card color.
+     * @return string 
+     */
+    public function getColor()
     {
         return $this->color;
     }

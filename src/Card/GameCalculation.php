@@ -5,6 +5,9 @@ namespace App\Card;
 use App\Card\CardHand;
 use App\Card\Card;
 
+/**
+ * Class with helper functions to make calculations for 21 game
+*/
 class GameCalculation
 {
     /**

@@ -41,22 +41,14 @@ class TexasController extends AbstractController
             $session->set("texas_game", $game);
         }
 
-        //Session variabel that makes sure new hand is dealt after hand is over
-        $session->set("hand_over", false);
-
         //Get player's money.
         $currentMoney = $session->get("current_money") ?? null;
 
-        //Session variable that decides if game is over (when money reaches 0)
         $session->set("game_over", false);
-        if ($currentMoney == 0) {
-            $session->set("game_over", true);
-        }
+        //Ends game if money is 0 and hand is over
 
-        //Initialize money if not yet done
-        if ($currentMoney == null && $currentMoney != null) {
-            $currentMoney = 200;
-            $session->set("current_money", $currentMoney);
+        if ($currentMoney == 0 && $session->get("hand_over")) {
+            $session->set("game_over", true);
         }
 
         // Deal initial cards if not already dealt
@@ -64,59 +56,37 @@ class TexasController extends AbstractController
             $game->dealHands();
         }
 
-        // Initialize empty strings
-        $winnerString = "";
-        $betString = "";
-        $userCombination = "";
-        $bankCombination = "";
-
-        // Get current bet amount
-        $currentBet = $game->getCurrentBet();
+        $session->set("hand_over", false);
 
         // If all cards are on the table, end the game and get the result
         if (count($game->getTableCards()) == 5) {
             $session->set("hand_over", true);
-            $gameResult = $game->endGame();
-            if ($gameResult["winner"] == 0) {
-                $winnerString = "Ingen vinnare!";
-                $betString = "Du får tillbaka dina marker.";
-                $session->set("current_money", $currentMoney + $currentBet);
-            } elseif ($gameResult["winner"] == 1) {
-                $winnerString = "Banken vinner!";
-                $betString = "Du förlorade " . $currentBet . " marker.";
-            } elseif ($gameResult["winner"] == 2) {
-                $winnerString = "Du vann!";
-                $betString = "Du vann " . ($currentBet * 2) . " marker!";
-                $newTotalMoney = $currentMoney + ($currentBet * 2);
-                $session->set("current_money", $newTotalMoney);
-            }
-
-            if ($gameResult["won_by_rank"]) {
-                $winnerString .= " Handen avgjordes genom kortvalör.";
-            }
+            $gameResult = $game->endGame($currentMoney);
+            $session->set("current_money", $gameResult["current_money"]);
 
             $bankCombination = "Banken har " . $gameResult["first_player_combination"] . ".";
             $userCombination = "Du har " . $gameResult["second_player_combination"] . ".";
+
+            if ($gameResult["current_money"] == 0) {
+                $gameLost = true;
+            }
         }
 
 
         // Send data to template
-        $userCards = $game->getUserCards();
-        $bankCards = $game->getBankCards();
-        $tableCards = $game->getTableCards();
-
         $data = [
-            'user_cards' => $userCards,
-            'bank_cards' => $bankCards,
-            'table_cards' => $tableCards,
-            'winner_string' => $winnerString,
-            'bank_combination' => $bankCombination,
-            'user_combination' => $userCombination,
+            'user_cards' => $game->getUserCards(),
+            'bank_cards' => $game->getBankCards(),
+            'table_cards' => $game->getTableCards(),
+            'winner_string' => $gameResult["winner_string"] ?? "",
+            'bank_combination' => $bankCombination ?? "",
+            'user_combination' => $userCombination ?? "",
             'current_money' => $session->get("current_money"),
             'current_bet' => $game->getCurrentBet(),
-            'hand_over' => $session->get("hand_over"),
-            'game_over' => $session->get("game_over"),
-            'bet_string' => $betString
+            'hand_over' => $session->get("hand_over") ?? false,
+            'game_over' => $session->get("game_over") ?? false,
+            'bet_string' => $gameResult["bet_string"] ?? "",
+            "game_lost" => $gameLost ?? false
         ];
 
         return $this->render('texas/texas-play.html.twig', $data);
@@ -152,6 +122,9 @@ class TexasController extends AbstractController
                 $session->set("current_money", $currentMoney - 20);
         } elseif ($action == "restart") {
             $session->set("current_money", 200);
+            $newGame = new TexasGame();
+            $session->set("texas_game", $newGame);
+        } elseif ($action == "new-hand") {
             $newGame = new TexasGame();
             $session->set("texas_game", $newGame);
         }

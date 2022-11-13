@@ -6,7 +6,7 @@ use App\Card\CardHand;
 use App\Card\Card;
 
 /**
- *
+ * Class with helper methods to calculate points in Texas Hold'em Game
  * @SuppressWarnings(PHPMD.ElseExpression)
  */
 
@@ -46,18 +46,19 @@ class TexasCalculation
         $resultHand2 = $this->getPointsForFullSetOfCards($fullHand2);
 
 
-        return $this->compareHandResults($resultHand1,$resultHand2);
+        return $this->compareHandResults($resultHand1, $resultHand2);
     }
 
     /**
      *
-     * Compare results of two analysed 7 card hands 
+     * Compare results of two analysed 7 card hands
      *
      * @param mixed[] $resultHand1
      * @param mixed[] $resultHand2
      * @return mixed[]
     */
-    public function compareHandResults($resultHand1, $resultHand2){
+    public function compareHandResults($resultHand1, $resultHand2)
+    {
 
         $comparisonResults = array ("first_player_points" => $resultHand1["points"],
         "second_player_points" => $resultHand2["points"],
@@ -67,18 +68,22 @@ class TexasCalculation
 
         /* Compares points to get winner. */
         $comparisonResults["winner"] = $resultHand1["points"] < $resultHand2["points"] ? 2 : 1;
-        
+
         if ($resultHand1["points"] == $resultHand2["points"]) {
             //Compare ranks of cards in combinaton if both players have same points
             $comparisonResults["winner"] = 0;
             $comparisonResults["won_by_rank"] = true;
             $comparisonResults["winner"] = $this->compareRanks($resultHand1["rank"], $resultHand2["rank"]);
-            
+
             // If winner still hasn't been found, compare ranks of extra cards.
             // Since both players have the same combination (e.g. two pairs)
             // they will have the same amount of remaining cards!
             if ($comparisonResults["winner"] == 0) {
-                $comparisonResults["winner"] = $this->compareRanks($resultHand1["remaining_card_ranks"], $resultHand2["remaining_card_ranks"]);;
+                $comparisonResults["winner"] = $this->compareRanks(
+                    $resultHand1["remaining_card_ranks"],
+                    $resultHand2["remaining_card_ranks"]
+                );
+                ;
             }
         }
         return $comparisonResults;
@@ -88,12 +93,13 @@ class TexasCalculation
     /**
      *
      * Compare ranks of cards to decide between two hands - returns 1 or 2 or 0 based on winner (0 = no winner).
-     * 
+     *
      * @param array<int> $firstRanks
      * @param array<int> $secondRanks
      * @return int;
     */
-    public function compareRanks($firstRanks, $secondRanks){
+    public function compareRanks($firstRanks, $secondRanks)
+    {
         for ($x = count($firstRanks) - 1; $x > -1; $x--) {
             if ($firstRanks[$x] > $secondRanks[$x]) {
                 return 1;
@@ -145,11 +151,11 @@ class TexasCalculation
             2 => "två par",
             1 => "par",
         );
-        
+
         // Run all combinat functions until match is found - starting at best combination
-        for($x = 8; $x > 0; $x--){
+        for ($x = 8; $x > 0; $x--) {
             $result = call_user_func_array([$functionArray[$x][0], $functionArray[$x][1]], [$sortedCards]);
-            if($result["found"]){
+            if ($result["found"]) {
                 $result["points"] = $x;
                 $result["combination"] = $combinationArray[$x];
                 return $result;

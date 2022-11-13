@@ -60,7 +60,7 @@ class TexasGameTest extends TestCase
         $game->dealTableCards();
         $game->dealTableCards();
         $game->dealTableCards();
-        $result = $game->endGame();
+        $result = $game->endGame(200);
 
         $this->assertArrayHasKey("winner", $result);
     }

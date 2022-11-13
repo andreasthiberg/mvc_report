@@ -7,7 +7,7 @@ use App\Card\Deck;
 use App\Card\GameCalculation;
 
 /**
- *
+ * Class representing a game of 21
  * @SuppressWarnings(PHPMD.ElseExpression)
  */
 
@@ -58,31 +58,53 @@ class Game
         return $this->bank->getHand()->getCards();
     }
 
+    /**
+     *
+     * Gets total user points
+    */
     public function getUserPoints(): int
     {
         return $this->userPoints;
     }
 
+    /**
+     *
+     * Gets total bank points
+    */
     public function getBankPoints(): int
     {
         return $this->bankPoints;
     }
 
+    /**
+     *
+     * Gets game winner
+    */
     public function getWinner(): string
     {
         return $this->winner;
     }
 
+    /**
+     *
+     * Gets string representing whose turn it is is
+    */
     public function getTurn(): string
     {
         return $this->turn;
     }
 
+    /**
+     * End user's card drawing
+    */
     public function userStop(): void
     {
         $this->turn = "bank";
     }
 
+    /**
+     * Draws a card for the bank
+    */
     public function drawBankCard(Card $presetCard = null): void
     {
         //Optional preset card as argument - otherwise draw
@@ -101,6 +123,9 @@ class Game
         $this->winner = $calc->calculateWinner($this->bankPoints, $this->userPoints);
     }
 
+    /**
+     * Draws a card for the user
+    */
     public function drawUserCard(Card $presetCard = null): void
     {
         if (is_null($presetCard)) {

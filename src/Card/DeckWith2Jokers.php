@@ -5,6 +5,9 @@ namespace App\Card;
 use App\Card\Card;
 use App\Card\Deck;
 
+/**
+ * Class representing a deck of cards with 2 jokers
+*/
 class DeckWith2Jokers extends Deck
 {
     public function __construct()

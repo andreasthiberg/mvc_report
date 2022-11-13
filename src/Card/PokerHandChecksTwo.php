@@ -7,7 +7,7 @@ use App\Card\TexasCalculation;
 use App\Card\Card;
 
 /**
- *
+ * Class with methods to look for card combination in poker hand (second of two)
  * @SuppressWarnings(PHPMD.ElseExpression)
  */
 

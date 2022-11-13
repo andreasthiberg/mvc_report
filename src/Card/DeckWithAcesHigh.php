@@ -5,6 +5,9 @@ namespace App\Card;
 use App\Card\Card;
 use App\Card\Deck;
 
+/**
+ * Class representing a deck of cards where aces are worth 14
+*/
 class DeckWithAcesHigh extends Deck
 {
     public function __construct()

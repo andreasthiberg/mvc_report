@@ -5,22 +5,26 @@ namespace App\Card;
 use App\Card\Card;
 
 /**
- *
+ * Class representing a collection of playing cards in a hand.
  * @SuppressWarnings(PHPMD.ElseExpression)
  */
 class CardHand
 {
     /**
-     * @var array<Card> collection of cards in hand
+     * Collection of cards in hand
+     * @var array<Card> 
     */
     private $hand = [];
 
-    private int $points;
+    /**
+     * Total points of hands (used by 21 game)
+     * @var int 
+    */
+    private $points;
 
     /**
      *
      * Adds a card to hand
-     *
      * @return void
     */
     public function addCard(Card $newCard)
@@ -57,6 +61,12 @@ class CardHand
         return $this->hand;
     }
 
+    /**
+     *
+     * Returns total points of hand (for game 21)
+     *
+     * @return array<Card>
+    */
     public function getPoints(): int
     {
         $newTotal = 0;

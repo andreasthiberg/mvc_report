@@ -4,11 +4,11 @@ namespace App\Card;
 
 use App\Card\Player;
 use App\Card\CardHand;
-use App\Card\Deck;
 use App\Card\TexasCalculatio;
 
 /**
- *
+ * 
+ * Class that runs a hand of Texas Hold'em
  * @SuppressWarnings(PHPMD.ElseExpression)
  */
 
@@ -16,7 +16,7 @@ class TexasGame
 {
     private Player $user;
     private Player $bank;
-    private DeckWithAcesHigh $deck;
+    private Deck $deck;
     private CardHand $tableCards;
 
     private int $currentBet;
@@ -27,7 +27,7 @@ class TexasGame
         $this->bank = new Player(2);
         $this->tableCards = new CardHand();
 
-        $this->deck = new DeckWithAcesHigh();
+        $this->deck = new Deck();
         $this->deck->shuffleDeck();
 
         $this->currentBet = 0;
@@ -66,19 +66,19 @@ class TexasGame
         return $this->tableCards->getCards();
     }
 
+    /**
+     * Gets the current player bet
+    */
     public function getCurrentBet(): int
     {
         return $this->currentBet;
     }
 
     /**
-     *
      * Gives a  card to user
-     *
     */
     public function giveCardToUser(): void
     {
-        
         /**
         * @var array<Card> drawn cards
         */
@@ -87,9 +87,7 @@ class TexasGame
     }
 
     /**
-     *
      * Gives a card to bank
-     *
     */
     public function giveCardToBank(): void
     {
@@ -102,9 +100,7 @@ class TexasGame
     }
 
     /**
-     *
      * Gives a card to table cards
-     *
     */
     public function giveCardToTable(): void
     {
@@ -112,15 +108,13 @@ class TexasGame
          * @var array<Card> drawn cards
         */
         $drawnCards = $this->deck->drawCards(1);
-        
+
         $this->tableCards->addCard($drawnCards[0]);
     }
 
 
     /**
-     *
      * Deals initial 2 cards to both players
-     *
     */
     public function dealHands(): void
     {
@@ -131,9 +125,7 @@ class TexasGame
     }
 
     /**
-     *
-     * Puts 3 or 1 cards new cards on table
-     *
+     * Puts 3 or 1 cards new cards on table depending on game status
     */
     public function dealTableCards(): void
     {
@@ -148,9 +140,7 @@ class TexasGame
     }
 
     /**
-     *
      * Bets 20 money for the player
-     *
     */
     public function makeBet(): void
     {
@@ -163,14 +153,39 @@ class TexasGame
      * @return mixed[]
      *
     */
-    public function endGame()
+    public function endGame(int $currentMoney)
     {
         $calc = new TexasCalculation();
-        $comparisonResults = $calc->compareTexasHands(
+        $endGameResult = $calc->compareTexasHands(
             $this->bank->getHand(),
             $this->user->getHand(),
             $this->tableCards
         );
-        return $comparisonResults;
+
+        $winnerString = "";
+        $betString = "";
+
+        if ($endGameResult["winner"] == 0) {
+            $winnerString = "Ingen vinnare!";
+            $betString = "Du får tillbaka dina marker.";
+            $currentMoney = $currentMoney + $this->currentBet;
+        } elseif ($endGameResult["winner"] == 1) {
+            $winnerString = "Banken vinner!";
+            $betString = "Du förlorade " . $this->currentBet . " marker.";
+        } elseif ($endGameResult["winner"] == 2) {
+            $winnerString = "Du vann!";
+            $betString = "Du vann " . ($this->currentBet * 2) . " marker!";
+            $newTotalMoney = $currentMoney + ($this->currentBet * 2);
+            $currentMoney = $newTotalMoney;
+        }
+        if ($endGameResult["won_by_rank"]) {
+            $winnerString .= " Handen avgjordes genom kortvalör.";
+        }
+
+        $endGameResult["winner_string"] = $winnerString;
+        $endGameResult["bet_string"] = $betString;
+        $endGameResult["current_money"] = $currentMoney;
+
+        return $endGameResult;
     }
 }

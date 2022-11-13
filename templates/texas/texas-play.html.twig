@@ -4,6 +4,15 @@
 {% block title %}Me-sida{% endblock %}
 
 {% block content %}
+    <div id="poker-content" class="content">
+    <div class="texas-info-container" id="texas-info-1">
+        <span style="font-size: 24px">Regler</span><br><br>
+        Satsa pengar inför varje delning - om du vinner får du dubbla pengarna tillbaka.<br><br>
+
+        Du måste satsa minst 20 för att vara med på en hand<br><br>
+        Om du får slut på pengar är spelet slut.<br>
+
+    </div>
     <h1 class="texas-title">Texas hold'em</h1>
     <div class="texas-game-container">
 
@@ -32,26 +41,28 @@
         </div>
         
         <div class="bet-container">
-        Nuvarande marker: {{current_money}}<br>
-        Nuvarande satsning: {{current_bet}}
+        Marker: {{current_money}}<br>
+        Pott: {{current_bet}}
         </div>
     </div>
     
 
     <div class="texas-button-container">
     <form class="texas-button-form" method="post">
-                <button {% if game_over %} disabled {% endif %} name="action" value="new-cards" type="submit">Dela</button>
-                <button {% if hand_over or game_over %} disabled {% endif %} name="action" value="bet" type="submit">Satsa pengar</button>
+                <button {% if game_over or current_bet == 0 or game_lost %} disabled {% endif %} name="action" value="new-cards" type="submit">Dela</button>
+                <button {% if hand_over or game_over or current_money == 0 %} disabled {% endif %} name="action" value="bet" type="submit">Lägg in 20</button>
+                 <button {% if game_over or hand_over %} disabled {% endif %}name="action" value="new-hand" type="submit">Lägg dig</button>
                 <button name="action" value="restart" type="submit">Nytt spel</button>
 
     </form>
     
     </div>
-    <div class="texas-info-container">
+    <div class="texas-info-container" id="texas-info-2">
         <span style="font-size: 24px">{{winner_string}}</span><br><br>
         {{bank_combination}}<br>
         {{user_combination}}<br><br>
         {{bet_string}}<br>
+    </div>
     </div>
     </div>
 {% endblock %}

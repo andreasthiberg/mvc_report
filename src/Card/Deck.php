@@ -4,6 +4,9 @@ namespace App\Card;
 
 use App\Card\Card;
 
+/**
+ * Class representing a deck of cards
+*/
 class Deck
 {
     /**
@@ -50,11 +53,17 @@ class Deck
         return $sortedCardArray;
     }
 
+    /**
+     * Adds a card to the deck
+    */
     public function addCard(string $suit, int $rank): void
     {
         $this->cards[] = new Card($suit, $rank);
     }
 
+    /**
+     * Shuffles the deck
+    */
     public function shuffleDeck(): void
     {
         shuffle($this->cards);
@@ -77,6 +86,9 @@ class Deck
         return $drawnCards;
     }
 
+    /**
+     * Gets total number of cards in deck
+    */
     public function getNumberOfCards(): int
     {
         return count($this->cards);
