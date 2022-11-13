@@ -4,13 +4,15 @@
 {% block title %}Användare{% endblock %}
 {% block content %}
     <div class="user-content">
+    <a href="{{ path("texas-home") }}">&#x3c;- Tillbaka</a>
     <h2>Logga in</h2>
     <form method="post">
-        <label for="email">Email:</label><br>
-        <input required type="text" id="email" name="email"><br>
+        <label for="email">Akronym:</label><br>
+        <input required type="text" id="akronym" name="akronym"><br>
         <label for="password">Lösenord:</label><br>
-        <input type="password" id="password" name="password"><br><br>
+        <input required type="password" id="password" name="password"><br><br>
         <input type="submit" value="Logga in">
     </form>
+    {{ message }}
     </div>
 {% endblock %}

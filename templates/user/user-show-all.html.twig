@@ -1,0 +1,14 @@
+{# templates/user/user-show-all.html.twig #}
+{% extends 'baseProject.html.twig' %}
+
+{% block title %}Användare{% endblock %}
+{% block content %}
+    <div class="user-content">
+    <a href="{{ path("texas-home") }}">&#x3c;- Tillbaka</a>
+    
+    <h2>Alla användare</h2>
+    {% for user in users %}
+        {{ user.name }}
+    {% endfor %}
+    </div>
+{% endblock %}

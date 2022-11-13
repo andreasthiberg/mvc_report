@@ -72,7 +72,7 @@ class BooksController extends AbstractController
     }
 
     /**
-     * @Route("/books/show/{id}", name="books-show-single")
+     * @Route("/books/show/{bookId}", name="books-show-single")
      */
     public function showBookById(
         BooksRepository $booksRepository,
@@ -89,7 +89,7 @@ class BooksController extends AbstractController
     }
 
     /**
-     * @Route("/books/update/{id}", name="books-update", methods={"GET"})
+     * @Route("/books/update/{bookId}", name="books-update", methods={"GET"})
      */
     public function updateBook(
         BooksRepository $booksRepository,
@@ -143,6 +143,6 @@ class BooksController extends AbstractController
 
         $entityManager->flush();
 
-        return $this->redirectToRoute('books-show-single', ["id" => $bookId]);
+        return $this->redirectToRoute('books-show-single', ["bookId" => $bookId]);
     }
 }
