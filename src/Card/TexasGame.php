@@ -7,7 +7,7 @@ use App\Card\CardHand;
 use App\Card\TexasCalculatio;
 
 /**
- * 
+ *
  * Class that runs a hand of Texas Hold'em
  * @SuppressWarnings(PHPMD.ElseExpression)
  */

@@ -1,0 +1,25 @@
+{# templates/user/user-create.html.twig #}
+{% extends 'baseProject.html.twig' %}
+
+{% block title %}Användare{% endblock %}
+{% block content %}
+    <div class="user-content">
+    <h2>Skapa användare</h2>
+    <form method="post">
+        <label for="name">Namn:</label><br>
+        <input required type="text" id="name" name="name"><br>
+        <label for="akronym">Akronym:</label><br>
+        <input required type="text" id="akronym" name="akronym"><br>
+        <label for="email">Email:</label><br>
+        <input required type="text" id="email" name="email"><br>
+        <label for="password">Lösenord:</label><br>
+        <input type="password" id="password" name="password"><br><br>
+        <input type="radio" id="user" name="type" value="user" checked="checked">
+        <label for="user">Vanlig användare</label><br>
+        <input type="radio" id="admin" name="type" value="admin">
+        <label for="admin">Admin</label><br><br>
+    
+        <input type="submit" value="Skapa användare">
+    </form>
+    </div>
+{% endblock %}

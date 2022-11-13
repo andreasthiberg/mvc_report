@@ -8,7 +8,6 @@ namespace App\Card;
  */
 class Card
 {
-
     private string $suit ;
     private int $rank;
     private string $color;
@@ -24,10 +23,10 @@ class Card
             $this->color = "blue";
         }
     }
-    
+
     /**
      * Returns a symbol representing the suit of the card
-     * @return string 
+     * @return string
      */
     public function getSymbol()
     {
@@ -44,7 +43,7 @@ class Card
 
     /**
      * Returns a string representation of the card rank, with king as "K" etc.
-     * @return string 
+     * @return string
      */
     public function getRankStringIncludingJoker()
     {
@@ -66,7 +65,7 @@ class Card
 
     /**
      * Returns card suit.
-     * @return string 
+     * @return string
      */
     public function getSuit()
     {
@@ -75,7 +74,7 @@ class Card
 
     /**
      * Returns card rank.
-     * @return int 
+     * @return int
      */
     public function getRank()
     {
@@ -84,7 +83,7 @@ class Card
 
     /**
      * Returns card color.
-     * @return string 
+     * @return string
      */
     public function getColor()
     {

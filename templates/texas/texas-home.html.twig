@@ -4,11 +4,13 @@
 {% block title %}Projekt - Hem{% endblock %}
 {% block content %}
     <div class="poker-page-content">
-    <h1>Välkommen!</h1>
-    <p>Hej! Projekt</p>
+    <h1>Välkommen...</h1>
+    <p>...till Texas Hold'em-projektet! Klicka nedan för att spela eller för att interagera med användar-databasen.</p>
         <ul>
         <li><a href="{{ path("texas-about") }}">Om projektet</a></li>
         <li><a href="{{ path("texas-play") }}">Spela Texas holdem</a></li>
+        <li><a href="{{ path("user-create") }}">Skapa användare</a></li>
+        <li><a href="{{ path("user-login") }}">Logga in</a></li>
         </ul>
     </div>
 {% endblock %}

@@ -1,0 +1,16 @@
+{# templates/user/user-create.html.twig #}
+{% extends 'baseProject.html.twig' %}
+
+{% block title %}Användare{% endblock %}
+{% block content %}
+    <div class="user-content">
+    <h2>Logga in</h2>
+    <form method="post">
+        <label for="email">Email:</label><br>
+        <input required type="text" id="email" name="email"><br>
+        <label for="password">Lösenord:</label><br>
+        <input type="password" id="password" name="password"><br><br>
+        <input type="submit" value="Logga in">
+    </form>
+    </div>
+{% endblock %}

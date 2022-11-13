@@ -12,13 +12,13 @@ class CardHand
 {
     /**
      * Collection of cards in hand
-     * @var array<Card> 
+     * @var array<Card>
     */
     private $hand = [];
 
     /**
      * Total points of hands (used by 21 game)
-     * @var int 
+     * @var int
     */
     private $points;
 
