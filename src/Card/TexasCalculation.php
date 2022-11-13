@@ -122,62 +122,41 @@ class TexasCalculation
         //Check each possible point giving hand in order of points given. If no combination is found,
         // return 0 points and five highest cards.
 
-        $result = $pokerHandChecksOne->checkStraightFlush($sortedCards);
-        if ($result["found"]) {
-            $result["points"] = 8;
-            $result["combination"] = "färgstege";
-            return $result;
+        // Array of all hand checking functions
+        $functionArray = array (
+            8 => [ $pokerHandChecksOne, "checkStraightFlush"],
+            7 => [ $pokerHandChecksOne, "checkFourOfAKind"],
+            6 => [ $pokerHandChecksOne, "checkFullHouse"],
+            5 => [ $pokerHandChecksOne, "checkFlush"],
+            4 => [ $pokerHandChecksTwo, "checkStraight"],
+            3 => [ $pokerHandChecksTwo, "checkThreeOfAKind"],
+            2 => [ $pokerHandChecksTwo, "checkTwoPairs"],
+            1 => [ $pokerHandChecksTwo, "checkPair"]
+        );
+
+        // Array of combination names
+        $combinationArray = array (
+            8 => "färgstege",
+            7 => "fyrtal",
+            6 => "kåk",
+            5 => "färg",
+            4 => "stege",
+            3 => "triss",
+            2 => "två par",
+            1 => "par",
+        );
+        
+        // Run all combinat functions until match is found - starting at best combination
+        for($x = 8; $x > 0; $x--){
+            $result = call_user_func_array([$functionArray[$x][0], $functionArray[$x][1]], [$sortedCards]);
+            if($result["found"]){
+                $result["points"] = $x;
+                $result["combination"] = $combinationArray[$x];
+                return $result;
+            }
         }
 
-        $result = $pokerHandChecksOne->checkFourOfAKind($sortedCards);
-        if ($result["found"]) {
-            $result["points"] = 7;
-            $result["combination"] = "fyrtal";
-            return $result;
-        }
-
-        $result = $pokerHandChecksOne->checkFullHouse($sortedCards);
-        if ($result["found"]) {
-            $result["points"] = 6;
-            $result["combination"] = "kåk";
-            return $result;
-        }
-
-        $result = $pokerHandChecksOne->checkFlush($sortedCards);
-        if ($result["found"]) {
-            $result["points"] = 5;
-            $result["combination"] = "färg";
-            return $result;
-        }
-
-        $result = $pokerHandChecksTwo->checkStraight($sortedCards);
-        if ($result["found"]) {
-            $result["points"] = 4;
-            $result["combination"] = "stege";
-            return $result;
-        }
-
-        $result = $pokerHandChecksTwo->checkThreeOfAKind($sortedCards);
-        if ($result["found"]) {
-            $result["points"] = 3;
-            $result["combination"] = "triss";
-            return $result;
-        }
-
-        $result = $pokerHandChecksTwo->checkTwoPairs($sortedCards);
-        if ($result["found"]) {
-            $result["points"] = 2;
-            $result["combination"] = "två par";
-            return $result;
-        }
-
-        $result = $pokerHandChecksTwo->checkPair($sortedCards);
-        if ($result["found"]) {
-            $result["points"] = 1;
-            $result["combination"] = "par";
-            return $result;
-        }
-
+        //Get all cards if no combination found
         $highestCards = array_slice($sortedCards, -5);
         $result = array("points" => 0, "remaining_card_ranks" => $highestCards,
         "found" => false, "rank" => [], "combination" => "inget");
