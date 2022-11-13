@@ -91,7 +91,7 @@ class TexasGame
      * Gives a card to bank
      *
     */
-    public function giveCardToBank(Card $presetCard = null): void
+    public function giveCardToBank(): void
     {
         /**
          * @var array<Card> drawn cards
