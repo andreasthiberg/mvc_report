@@ -42,7 +42,7 @@ class TexasController extends AbstractController
         }
 
         //Get player's money.
-        $currentMoney = $session->get("current_money") ?? null;
+        $currentMoney = $session->get("current_money") ?? 200;
 
         $session->set("game_over", false);
         //Ends game if money is 0 and hand is over

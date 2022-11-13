@@ -65,7 +65,7 @@ class CardHand
      *
      * Returns total points of hand (for game 21)
      *
-     * @return array<Card>
+     * @return int
     */
     public function getPoints(): int
     {
