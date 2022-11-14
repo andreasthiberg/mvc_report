@@ -13,14 +13,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AbstractController
 {
-    #[Route('/proj/user', name: 'app_user')]
-    public function index(): Response
-    {
-        return $this->render('user/user-home.html.twig', [
-            'controller_name' => 'UserController',
-        ]);
-    }
-
     /**
      * @Route("proj/user/create", name="user-create", methods={"GET"})
      */
@@ -69,7 +61,6 @@ class UserController extends AbstractController
      */
     public function loginUserHandler(
         UserRepository $userRepository,
-        ManagerRegistry $doctrine,
         Request $request,
         SessionInterface $session
     ): Response {
@@ -81,25 +72,24 @@ class UserController extends AbstractController
         $user = $userRepository
         ->findOneBy(array('akronym' => $akronym));
 
-        if($user != null){
-            if(password_verify($password,$user->getPassword())){
+        if ($user != null) {
+            if (password_verify($password, $user->getPassword())) {
                 $session->set("logged_in_user", $user);
                 return $this->redirectToRoute('user-page', ["userId" => $user->getId()]);
             }
         }
         $session->set("login_message", "Inloggningen misslyckades");
         return $this->redirectToRoute('user-login');
-
     }
 
     /**
      * @Route("proj/user/logout", name="user-logout")
      */
-    public function logoutUser(SessionInterface $session): Response {
+    public function logoutUser(SessionInterface $session): Response
+    {
 
         $session->set("logged_in_user", null);
         return $this->redirectToRoute('texas-home');
-
     }
 
     /**
@@ -110,7 +100,7 @@ class UserController extends AbstractController
         UserRepository $userRepository,
         SessionInterface $session
     ): Response {
-        
+
         $session->set("logged_in_user", null);
         $entityManager = $doctrine->getManager();
 
@@ -167,16 +157,16 @@ class UserController extends AbstractController
 
         $loggedInUser = $session->get("logged_in_user");
 
-        if($loggedInUser == null){
-            return $this->render('user/user-admin-page.html.twig', ["admin_access" => False]);
-        } else if ($loggedInUser->getType() != "admin"){
-            return $this->render('user/user-admin-page.html.twig', ["admin_access" => False]);
+        if ($loggedInUser == null) {
+            return $this->render('user/user-admin-page.html.twig', ["admin_access" => false]);
+        } elseif ($loggedInUser->getType() != "admin") {
+            return $this->render('user/user-admin-page.html.twig', ["admin_access" => false]);
         }
         $users = $userRepository
             ->findAll();
 
         $data = [
-            'admin_access' => True,
+            'admin_access' => true,
             'users' => $users
         ];
 
@@ -239,12 +229,12 @@ class UserController extends AbstractController
         $user = $userRepository
         ->find($userId);
 
-        if($action == "update"){
+        if ($action == "update") {
             $user->setName($request->request->get('name'));
             $user->setEmail($request->request->get('email'));
             $user->setPicture($request->request->get('picture'));
             $entityManager->persist($user);
-        } else if ($action == "delete" && $user->getType() != "admin"){
+        } elseif ($action == "delete" && $user->getType() != "admin") {
             $entityManager->remove($user);
         }
 
@@ -252,7 +242,4 @@ class UserController extends AbstractController
 
         return $this->redirectToRoute('texas-home');
     }
-
-
-
 }

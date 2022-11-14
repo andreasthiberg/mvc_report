@@ -13,7 +13,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Product|null findOneBy(array $criteria, array $orderBy = null)
  * @method Product[]    findAll()
  * @method Product[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+ * @SuppressWarnings(PHPMD)
  *
  */
 class ProductRepository extends ServiceEntityRepository

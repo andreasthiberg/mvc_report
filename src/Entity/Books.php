@@ -5,6 +5,11 @@ namespace App\Entity;
 use App\Repository\BooksRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * Book entity
+ * @SuppressWarnings(PHPMD)
+ * 
+*/
 #[ORM\Entity(repositoryClass: BooksRepository::class)]
 class Books
 {

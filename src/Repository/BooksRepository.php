@@ -13,6 +13,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Books|null findOneBy(array $criteria, array $orderBy = null)
  * @method Books[]    findAll()
  * @method Books[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @SuppressWarnings(PHPMD)
  */
 class BooksRepository extends ServiceEntityRepository
 {

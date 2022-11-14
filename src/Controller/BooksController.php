@@ -10,6 +10,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Controller for Library
+ * @SuppressWarnings(PHPMD.ShortVariable)
+ * 
+*/
 class BooksController extends AbstractController
 {
     /**
