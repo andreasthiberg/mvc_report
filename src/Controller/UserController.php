@@ -7,6 +7,7 @@ use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -42,12 +43,9 @@ class UserController extends AbstractController
 
         $hashedPassword = password_hash($request->request->get('password'), PASSWORD_DEFAULT);
 
-        $user->setName($request->request->get('name'));
-        $user->setEmail($request->request->get('email'));
         $user->setPassword($hashedPassword);
+        $user->setType("normal");
         $user->setAkronym($request->request->get('akronym'));
-        $user->setType($request->request->get('type'));
-        $user->setPicture($request->request->get('picture'));
 
         $entityManager->persist($user);
 
@@ -57,10 +55,12 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("proj/user/login/{message}", name="user-login", methods={"GET"})
+     * @Route("proj/user/login", name="user-login", methods={"GET"})
      */
-    public function loginUser(string $message = ""): Response
+    public function loginUser(SessionInterface $session): Response
     {
+        $message = $session->get("login_message");
+        $session->set("login_message", "");
         return $this->render('user/user-login.html.twig', ["message" => $message]);
     }
 
@@ -70,7 +70,8 @@ class UserController extends AbstractController
     public function loginUserHandler(
         UserRepository $userRepository,
         ManagerRegistry $doctrine,
-        Request $request
+        Request $request,
+        SessionInterface $session
     ): Response {
 
 
@@ -82,10 +83,22 @@ class UserController extends AbstractController
 
         if($user != null){
             if(password_verify($password,$user->getPassword())){
+                $session->set("logged_in_user", $user);
                 return $this->redirectToRoute('user-page', ["userId" => $user->getId()]);
             }
         }
-        return $this->redirectToRoute('user-login', ["message" => "FEL!"]);
+        $session->set("login_message", "Inloggningen misslyckades");
+        return $this->redirectToRoute('user-login');
+
+    }
+
+    /**
+     * @Route("proj/user/logout", name="user-logout")
+     */
+    public function logoutUser(SessionInterface $session): Response {
+
+        $session->set("logged_in_user", null);
+        return $this->redirectToRoute('texas-home');
 
     }
 
@@ -94,9 +107,11 @@ class UserController extends AbstractController
      */
     public function resetDatabase(
         ManagerRegistry $doctrine,
-        UserRepository $userRepository
+        UserRepository $userRepository,
+        SessionInterface $session
     ): Response {
         
+        $session->set("logged_in_user", null);
         $entityManager = $doctrine->getManager();
 
         $oldUsers = $userRepository
@@ -116,6 +131,7 @@ class UserController extends AbstractController
         $user->setPassword($hashedPassword);
         $user->setAkronym("doe");
         $user->setType("normal");
+        $user->setChips(500);
         $user->setPicture("https://freesvg.org/img/Male-Avatar-2.png");
 
         $entityManager->persist($user);
@@ -131,6 +147,7 @@ class UserController extends AbstractController
         $user2->setPassword($hashedPassword);
         $user2->setAkronym("admin");
         $user2->setType("admin");
+        $user2->setChips(10000);
         $user2->setPicture("https://freesvg.org/img/Female-Avatar-2.png");
 
         $entityManager->persist($user2);
@@ -141,19 +158,29 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("proj/user/show-all", name="user-show-all", methods={"GET"})
+     * @Route("proj/user/admin-page", name="user-admin-page", methods={"GET"})
      */
-    public function showAllUsers(
-        UserRepository $userRepository
+    public function adminPage(
+        UserRepository $userRepository,
+        SessionInterface $session
     ): Response {
+
+        $loggedInUser = $session->get("logged_in_user");
+
+        if($loggedInUser == null){
+            return $this->render('user/user-admin-page.html.twig', ["admin_access" => False]);
+        } else if ($loggedInUser->getType() != "admin"){
+            return $this->render('user/user-admin-page.html.twig', ["admin_access" => False]);
+        }
         $users = $userRepository
             ->findAll();
 
         $data = [
+            'admin_access' => True,
             'users' => $users
         ];
 
-        return $this->render('user/user-show-all.html.twig', $data);
+        return $this->render('user/user-admin-page.html.twig', $data);
     }
 
     /**
@@ -161,17 +188,71 @@ class UserController extends AbstractController
      */
     public function userPage(
         UserRepository $userRepository,
-        int $userId
+        int $userId,
+        SessionInterface $session
     ): Response {
+        $loggedInUser = $session->get("logged_in_user");
         $user = $userRepository
         ->find($userId);
 
         $data = [
-            'user' => $user
+            'user' => $user,
+            'logged_in_user' => $loggedInUser
         ];
 
         return $this->render('user/user-page.html.twig', $data);
     }
+
+    /**
+     * @Route("proj/user/update/{userId}", name="user-update", methods={"GET"})
+     */
+    public function userUpdate(
+        UserRepository $userRepository,
+        int $userId,
+        SessionInterface $session
+    ): Response {
+        $loggedInUser = $session->get("logged_in_user");
+        $user = $userRepository
+        ->find($userId);
+
+        $data = [
+            'user' => $user,
+            'logged_in_user' => $loggedInUser
+        ];
+
+        return $this->render('user/user-update.html.twig', $data);
+    }
+
+    /**
+     * @Route("proj/user/update/{userId}", name="user-update-handler", methods={"POST"})
+     */
+    public function userUpdateHandler(
+        UserRepository $userRepository,
+        int $userId,
+        Request $request,
+        ManagerRegistry $doctrine,
+    ): Response {
+
+        $entityManager = $doctrine->getManager();
+
+        $action = $request->request->get('action');
+        $user = $userRepository
+        ->find($userId);
+
+        if($action == "update"){
+            $user->setName($request->request->get('name'));
+            $user->setEmail($request->request->get('email'));
+            $user->setPicture($request->request->get('picture'));
+            $entityManager->persist($user);
+        } else if ($action == "delete" && $user->getType() != "admin"){
+            $entityManager->remove($user);
+        }
+
+        $entityManager->flush();
+
+        return $this->redirectToRoute('texas-home');
+    }
+
 
 
 }

@@ -52,8 +52,6 @@
                 <button {% if game_over or current_bet == 0 or game_lost %} disabled {% endif %} name="action" value="new-cards" type="submit">Dela</button>
                 <button {% if hand_over or game_over or current_money == 0 %} disabled {% endif %} name="action" value="bet" type="submit">Lägg in 20</button>
                  <button {% if game_over or hand_over %} disabled {% endif %}name="action" value="new-hand" type="submit">Lägg dig</button>
-                <button name="action" value="restart" type="submit">Nytt spel</button>
-
     </form>
     
     </div>

@@ -14,38 +14,29 @@ class User
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $akronym = null;
-
-    #[ORM\Column(length: 255)]
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
+    private ?string $akronym = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
     private ?string $type = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $picture = null;
+
+    #[ORM\Column]
+    private ?int $chips = null;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getAkronym(): ?string
-    {
-        return $this->akronym;
-    }
-
-    public function setAkronym(string $akronym): self
-    {
-        $this->akronym = $akronym;
-
-        return $this;
     }
 
     public function getPassword(): ?string
@@ -60,12 +51,24 @@ class User
         return $this;
     }
 
+    public function getAkronym(): ?string
+    {
+        return $this->akronym;
+    }
+
+    public function setAkronym(string $akronym): self
+    {
+        $this->akronym = $akronym;
+
+        return $this;
+    }
+
     public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 
@@ -77,7 +80,7 @@ class User
         return $this->email;
     }
 
-    public function setEmail(string $email): self
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
 
@@ -101,9 +104,21 @@ class User
         return $this->picture;
     }
 
-    public function setPicture(string $picture): self
+    public function setPicture(?string $picture): self
     {
         $this->picture = $picture;
+
+        return $this;
+    }
+
+    public function getChips(): ?int
+    {
+        return $this->chips;
+    }
+
+    public function setChips(int $chips): self
+    {
+        $this->chips = $chips;
 
         return $this;
     }

@@ -1,0 +1,34 @@
+{# templates/user/user-update.html.twig #}
+{% extends 'baseProject.html.twig' %}
+
+{% block title %}Uppdatera användare{% endblock %}
+{% block content %}
+    <div class="user-content">
+    {% if user.type != "admin" %}
+    <a href="{{ path("user-page", {userId:user.id}) }}">&#x3c;- Tillbaka</a>
+    {% else %}
+    <a href="{{ path("user-admin-page") }}">&#x3c;- Tillbaka</a>
+    {% endif %}
+    <h2>Uppdatera användare {{user.akronym}}</h2>
+    <form method="POST">
+    <label for="name">Namn:</label>
+     <input type="text" value="{{user.name}}" id="name" name="name"><br>
+    <label for="email">E-mail:</label>
+     <input type="text" value="{{user.email}}" id="email" name="email"><br>
+    <label for="picture">Profilbildslänk:</label>
+     <input type="text" value="{{user.picture}}" id="picture" name="picture"><br><br>
+
+     {% if logged_in_user.type == "admin" %}
+          <label for="chips">Marker:</label>
+        <input type="number" value="{{user.chips}}" id="chips" name="chips"><br><br>
+    {% endif %}
+
+    Nuvarande profilbild:<br>
+    <img class="profile-picture" src="{{ user.picture }}"><br>  
+        <button name="action" value="update" type="submit">Uppdatera information</button>
+        {% if user.type != "admin" and logged_in_user.type == "admin" %}
+        <button name="action" value="delete" type="submit">Ta bort användare</button>
+        {% endif %}
+    </form>
+    </div>
+{% endblock %}

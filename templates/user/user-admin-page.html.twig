@@ -1,0 +1,24 @@
+{# templates/user/user-admin-page.html.twig #}
+{% extends 'baseProject.html.twig' %}
+
+{% block title %}Användare{% endblock %}
+{% block content %}
+    <div class="user-content">
+    <a href="{{ path("texas-home") }}">&#x3c;- Tillbaka</a>
+    {% if not admin_access %}
+    <br><br>
+    Logga in som admin för att komma åt den här sidan.
+    {% else %}
+
+
+    <h2>Alla användare</h2>
+    {% for user in users %}
+        <b>{{ user.akronym }}</b><br>
+        <a href="{{ path("user-update", {userId: user.id} ) }}">>Ändra / ta bort användare</a><br><br>
+    {% endfor %}
+    <a href="{{ path("user-create") }}">Skapa ny användare</a>
+
+
+    {% endif %}
+    </div>
+{% endblock %}

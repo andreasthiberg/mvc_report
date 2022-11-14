@@ -1,4 +1,4 @@
-{# templates/user/user-show-all.html.twig #}
+{# templates/user/user-page.html.twig #}
 {% extends 'baseProject.html.twig' %}
 
 {% block title %}Användare{% endblock %}
@@ -8,7 +8,12 @@
     <h2>Användare {{user.akronym}}</h2>
     Namn: {{user.name}}<br>
     Email: {{ user.email }}<br>
+    Marker: {{ user.chips }}<br>
     Användartyp: {{ user.type }}<br><br>
-    Profilbild:<br> <img class="profile-picture" src="{{ user.picture }}">
+    Profilbild:<br> <img class="profile-picture" src="{{ user.picture }}"><br><br>
+    {% if logged_in_user.id == user.id %}
+    <a href="{{ path("user-update", {userId:user.id}) }}">Uppdatera information</a>
+    {% endif %}
     </div>
+    
 {% endblock %}

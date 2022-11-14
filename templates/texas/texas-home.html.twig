@@ -8,10 +8,19 @@
     <p>...till Texas Hold'em-projektet! Klicka nedan för att spela eller för att interagera med användar-databasen.</p>
         <ul>
         <li><a href="{{ path("texas-about") }}">Om projektet</a></li>
-        <li><a href="{{ path("texas-play") }}">Spela Texas holdem</a></li>
+        
+        {% if not logged_in_user %}
         <li><a href="{{ path("user-create") }}">Skapa användare</a></li>
         <li><a href="{{ path("user-login") }}">Logga in</a></li>
-        <li><a href="{{ path("user-show-all") }}">Visa alla användare</a></li>
+        {% else %}
+        <h3>Inloggad som {{logged_in_user.akronym}} ({{logged_in_user.type}}-användare)</h3>
+        <li><a href="{{ path("texas-play") }}">Spela Texas hold'em</a></li><br>
+        <li><a href="{{ path("user-logout") }}">Logga ut </a></li>
+        {% if logged_in_user.type == "admin" %}
+        <li><a href="{{ path("user-admin-page") }}">Se alla användare (admin-sida)</a></li>
+        {% endif %}
+        <li><a href="{{ path("user-page", {userId: logged_in_user.id} ) }}">Din användare</a></li>
+        {% endif %}
         </ul>
     </div>
 {% endblock %}

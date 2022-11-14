@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Books;
 use App\Repository\BooksRepository;
+use App\Entity\Books;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,7 +24,8 @@ class BooksController extends AbstractController
 
     /**
      * @Route("/books/show", name="books-show")
-     */
+     *
+    */
     public function showAllBooks(
         BooksRepository $booksRepository
     ): Response {
@@ -72,14 +73,14 @@ class BooksController extends AbstractController
     }
 
     /**
-     * @Route("/books/show/{bookId}", name="books-show-single")
+     * @Route("/books/show/{id}", name="books-show-single")
      */
     public function showBookById(
         BooksRepository $booksRepository,
-        int $bookId
+        int $id
     ): Response {
         $book = $booksRepository
-            ->find($bookId);
+            ->find($id);
 
         $data = [
             'book' => $book
@@ -89,14 +90,14 @@ class BooksController extends AbstractController
     }
 
     /**
-     * @Route("/books/update/{bookId}", name="books-update", methods={"GET"})
+     * @Route("/books/update/{id}", name="books-update", methods={"GET"})
      */
     public function updateBook(
         BooksRepository $booksRepository,
-        int $bookId
+        int $id
     ): Response {
         $book = $booksRepository
-            ->find($bookId);
+            ->find($id);
 
         $data = [
             'book' => $book
@@ -112,19 +113,19 @@ class BooksController extends AbstractController
         BooksRepository $booksRepository,
         ManagerRegistry $doctrine,
         Request $request,
-        int $bookId
+        int $id
     ): Response {
         $entityManager = $doctrine->getManager();
 
         $book = $booksRepository
-            ->find($bookId);
+            ->find($id);
 
         $action = $request->request->get('action');
 
         if ($action == "remove") {
             if (!$book) {
                 throw $this->createNotFoundException(
-                    'No product found for id ' . $bookId
+                    'No product found for id ' . $id
                 );
             }
 
@@ -143,6 +144,6 @@ class BooksController extends AbstractController
 
         $entityManager->flush();
 
-        return $this->redirectToRoute('books-show-single', ["bookId" => $bookId]);
+        return $this->redirectToRoute('books-show-single', ["id" => $id]);
     }
 }
