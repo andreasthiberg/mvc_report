@@ -21,6 +21,9 @@
      {% if logged_in_user.type == "admin" %}
           <label for="chips">Marker:</label>
         <input type="number" value="{{user.chips}}" id="chips" name="chips"><br><br>
+    {% else %}
+        <label for="chips">Marker:</label>
+        <input readonly="readonly" type="number" value="{{user.chips}}" id="chips" name="chips"><br><br>
     {% endif %}
 
     Nuvarande profilbild:<br>
