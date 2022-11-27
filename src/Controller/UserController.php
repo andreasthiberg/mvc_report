@@ -36,6 +36,7 @@ class UserController extends AbstractController
         $hashedPassword = password_hash($request->request->get('password'), PASSWORD_DEFAULT);
 
         $user->setPassword($hashedPassword);
+        $user->setChips(500);
         $user->setType("normal");
         $user->setAkronym($request->request->get('akronym'));
 

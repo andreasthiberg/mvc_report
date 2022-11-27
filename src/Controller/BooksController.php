@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Controller for Library
  * @SuppressWarnings(PHPMD.ShortVariable)
- * 
+ *
 */
 class BooksController extends AbstractController
 {

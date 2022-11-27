@@ -4,10 +4,13 @@
 {% block title %}Projekt - Om{% endblock %}
 {% block content %}
     <div class="poker-page-content">
-    <h1>Om projektet!</h1>
+    <h1>Om projektet</h1>
+    <p>Välkommen till mitt projekt för kursen MVC. Jag har designat ett Texas Hold'em-spel där du kan spela mot banken och satsa pengar på dina korthänder.
+    Du börjar med att skapa en användare för att sedan logga in, och du får sedan ett antal marker att spela med. Om du får slut på marker går det inte att spela längre.
+    Du kan också lägga till och ändra information för din användarprofil nedan. Lycka till!</p>
     <h2>Funktioner</h2>
     <ul>
-        <li>Återställ databas (/proj/reset)</li>
+        <li><a href="{{ path("user-reset-handler") }}">Återställ databas</a></li>
     </ul>
     <h2>Dokumenation</h2>
     <ul>
@@ -18,17 +21,25 @@
         <li><a href="https://scrutinizer-ci.com/g/andreasthiberg/mvc_report/">Länk till scrutinizer för repot</a></li>
     </ul>
     <h2>Om projektets kodkvalitet</h2>
-    Summering av projektes kodkvalitet. Vilka åtgärder har jag gjort, hur har jag jobbat med
-    kodkvaliteten, vilka verktyg jag har använt. Har jag fokuserat på några speciella saker?
 
-    valde att ignorera viss kritik mot else-satser
-    överlag många kompletteringar av typning från phpmd
-    phpmd gav mycket varningar om för komplexa klasser och funktioner - fick ändra och dela upp
-    ändra från if-satser till att köra funktioner genom array exemeplvis
+    <p>I de rapporter som länkas ovan - från PhpMetrics och Scrutiziner - kan man se resultatet av olika analyser av projekts kodkvalitet. I allmänhet
+    är resultaten ganska goda. I Scrutiziner ges en total poäng på 9.84/10. Några enskilda metoder har lite för många if-satser, vilket drar ned deras betyg till 
+    B - här hade jag kunnat förenkla koden lite mer. I övrigt så är testtäckningen bara 49% - men det beror på att jag enbart har skrivit tester för mina klasser.
+    För dessa är täckningen 100%. I mitt testsskrivande utgick jag från rapporten från phpunit, och arbetade mig genom en klass i taget tills alla var helt täckta.
+    </p>
+    <p>I PhpMetrics ser det mesta bra ut - två av mina klasser är dock lite väl komplexa. Det handlar om de klasser där jag lagrar alla metoder för att leta efter kortkombinationer
+    i en given pokerhand. Här gjorde jag ett val: Det hade varit enkelt att helt enkelt bryta upp metoderna till ännu fler klasser, i och med att de är oberoende. Detta hade följt 
+    kvalitetsstandarden om att inte ha många oberoende funktioner i samma klass. Å andra sidan så hade detta gjort koden mindre läsbar och översiktlig, och ökat
+    antalet klasser avsevärt. I och med att metoderna används en och en så påverkar den höga komplexiteten heller inte i praktiken klassernas "maintainability" och testbarhet.
 
-    Hade kunnat dela ut mina "kortuträknings"-klasser i ännu fler för att få ner komplexitet - men känns snarare som att det bidrar till svårläslig kod 
-    och onödigt många klasser. Tagit ett beslut!
+    <p>Överlag så har mitt arbete med kvalitet främst bestått i att arbeta utefter de rekommendationer som har tagits från av PhpMetrics och 
+    särskilt Scrutiziner. Det har främst handlat om just kodkomplexitet: Jag fick dela upp för stora metoder, och skriva om en del metoder som i för hög grad använde sig av 
+    många if-satser - detta för att få ned antalet vägar genom metoderna till en rimlig nivå. Det arbetet gav tydliga resultat även för kodens läsbarhet och kompakthet.</p>
 
-    phpstan nivå 6 - löstes av md
+    <p>Själva koden har jag i synnerhet förbättrat med verktyget phpstan, där jag la nivån på 6. Här visade verktyget på många brister i exempelvis typningen av argument och 
+    variabler - med hjälp av den analysen har jag gjort koden mer pålitlig och läsbar med PhpDoc-kommenterar och exakt typning. Verktyget phpmd 
+    hjälpte mig också genom att på ett enkelt sätt identifiera vilka metoder och klasser som var för komplexa - på ett smidigare sätt än Scrutinizer. Vissa varningar valde jag dock att 
+    stänga av - exempelvis så gillar inte phpmd else-satser, men på vissa platser i min kod upplevde jag att det hade gjort koden mindre läsbar om den skrevs på ett annat sätt.</p>
+    <br><br>
     </div>
 {% endblock %}

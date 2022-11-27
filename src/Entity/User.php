@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * User entity
  * @SuppressWarnings(PHPMD)
- * 
+ *
 */
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User

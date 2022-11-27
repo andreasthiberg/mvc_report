@@ -106,5 +106,36 @@ På ett sätt känns kodkvalitet ganska tydligt - ett gäng olika mätvärden r�
 <h3>Vilken är din TIL för detta kmom?</h3>
 Av de fyra C:na så tyckte jag särskilt Coupling kändes nytt och intressant. Även om man skriver modulärt (som vi har lärt oss) så blir det ju lätt långa kedjor av klasser som är beroende av varandra, och som därför blir känsliga för förändringar. Jag hade velat tittat närmare på hur man ska förhålla sig till sådana problem.
 
+<h2>Kmom10</h2>
+
+<h3>Uppfyllda krav</h3>
+
+<b>Krav 1-3</b></br></br>
+Jag valde att sätta ihop ett Texas Hol'em-spel med lite olika tillhörande funktioner. I själva spelet så tilldelas först banken och spelaren två kort var, varefter korten på bordet delas ut som i ett vanligt Hold'em-parti. Mellan varje utdelning kan spelaren satsa pengar, och om spelaren i slutändan slår banken så ges dubbla pengarna tillbaka. Det saknas en intelligent motspelare, så det handlar snarare om att satsa vid rätt tillfälle och att ha lite tur.
+</br></br>
+Spelet är implementerat via ett antal olika controllers och klasser som styr presentationen av det pågående spelet, hanteringen av spelets gång, samt beräkningar angående olika pokerhänder. Särskilt den sista kategorin utgör en stor del av den färdiga koden - en ganska stor mängd metoder finns för att i tur och ordning testa sig fram för att hitta den bästa pokerhanden bland sju möjliga kort. Dessa är av komplexitets-skäl uppdelade mellan klasserna PokerHandChecksOne och PokerHandChecksTwo. Vidare så har jag skrivit metoder för att jämföra två pokerhänders poäng och kort-rank i TexasCalculation, samt för genomförandet av ett parti i klassen TexasGame. I övrigt så använder jag mig i stor utsträckning av de klasser som skrevs för tidigare moment - för enstaka kort, för kortlekar och för korthänder. 
+Allt detta visualiseras genom TexasController som använder sig av en särskild template som visar spelets nuvarande status och som tillåter interaktion från användaren.
+</br></br>
+Spelet använder sig av en databas via ORM för att lagra enskilda spelares information, exempelvis hur många marker de har. Via databasen sker också inloggning - mer om implementationen av ORM står under krav 5 nedan.
+</br></br>
+Jag har använt mig av de olika kodstils-verktyg vi har gått igenom i kursen för att förbättra kodstandarden. Det arbetet har framförallt handlat om tydligare typning och om att bryta isär kod för att undvika för komplexa klasser och metoder. Vidare så har jag skrivit tester så att alla mina klasser ligger på 100% i täckning. Jag har också skrivit DocBlock-kommentarer till alla (?) klasser och metoder vilket syns i min phpdoc-dokumentation. Slutligen så finns en phpmetrics-rapport samt en scrutiziner-rapport länkad på about-sidan.
+Mer om mitt arbete med kodkvalitet står att läsa på min about-sida!
+</br></br>
+<b>Krav 5</b>
+</br></br>
+Spelet använder sig av en databas via ORM för att hålla reda på olika spelare och för att sköta in- och utloggning. Jag har skapat en ny entity "User" och en ny repository "UserRepository" som innehåller relevant information om en enskild spelare - det finns möjlighet att registrera nya användare och att sedan logga in. Spelaren kan sedan uppdatera sin information via en profilsida. Admin-användaren kan ändra alla spelares information, samt lägga till/ta bort användarnas marker. När en inloggad spelare spelar poker så används spelarens marker - om de tar slut går det inte längre att spela. All denna interaktion med databasen sker via UserController och ett antal templates för användare och administratör.
+
+<h3>Skriv ett allmänt stycke om hur projektet gick att genomföra.</h3>
+
+Det här projektet tog ganska lång tid för mig att genomföra, men det var givande. Den största utmaningen visade sig vara att skriva koden för ett Hold'em-spel. Särskilt det faktum att varje möjlig hand innehåller sju kort gjorde det lite klurigt. Jag prövade olika lösningar i början - jag försökte vara lite mer fyndig med hur programmet skulle hantera olika möjliga poäng för en viss hand. I slutändan landade jag dock i en ganska "primitiv" lösning där koden undersöker varje möjlig kombination (t.ex. fyrtal), en i taget. Antagligen finns det betydligt mer eleganta lösningar, men att dela upp koden på det här sättet gör i alla fall att den blir enklare att testa, förstå och underhålla. 
+</br></br>
+I övrigt så gick det ganska enkelt att implementera användare via ORM - jag hade gärna arbetat mer med det, men det får bli i framtiden. På grund av tidsbrist har jag inte skrivit någon presentation om kodkvalitet, men jag tycker att arbetet med kursen, projektet och de verktyg som har introducerats här har varit väldigt givande i den aspekten. Särskilt idéen om att med hjälp av verktyg få ner komplexiteten i sin kod känns nyttig.
+
+
+<h3>Avsluta med ett sista stycke med dina tankar om kursen.</h3>
+
+Jag tycker att kursen har varit bra - även om jag nu gjorde den ganska långt i efterhand. Hela MVC-upplägget som kändes ganska förvirrande i början har klarnat en hel del. Det känns som en rimligt motpart till det annorlunda upplägg med separation mellan klient och backend som vi har arbetat med i andra kurser. Jag tycker också att fokuset på kodkvalitet, samt introduktionen till ORM, har varit givande. 
+</br></br>
+Ett allmänt förslag är att jag personligen föredrar när slutprojektet är ett helt nytt projekt snarare än en fortsättning på samma (som här i report). Det gör att man kan ta med sig alla lärdomar och göra mer "rätt" från början, och att slutresultatet blir lite mer "rent", självständigt och komplett. Då blir det till exempel också roligare att visa upp på sin Github. Men det är mer än tanke, jag ger hur som helst kursen en 8a!
 
 {% endblock %}
