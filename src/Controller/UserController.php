@@ -234,6 +234,7 @@ class UserController extends AbstractController
             $user->setName($request->request->get('name'));
             $user->setEmail($request->request->get('email'));
             $user->setPicture($request->request->get('picture'));
+            $user->setChips($request->request->get('chips'));
             $entityManager->persist($user);
         } elseif ($action == "delete" && $user->getType() != "admin") {
             $entityManager->remove($user);
